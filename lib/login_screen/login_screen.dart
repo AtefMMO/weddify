@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:weddify/custom_widgets/custom_text_form_field.dart';
+import 'package:weddify/login_screen/login_bloc.dart';
 import 'package:weddify/login_screen/signup_screen.dart';
-
-import '../init_route.dart';
 
 class LogInScreen extends StatelessWidget {
   static const String routeName = 'LoginScreen';
   var formKey = GlobalKey<FormState>();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  final LoginBloc _loginBloc = LoginBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,32 +31,50 @@ class LogInScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.width * 0.4,
-                        bottom: MediaQuery.of(context).size.width * 0.08),
-                    child: Text(
+                    padding:
+                        EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.4, bottom: MediaQuery.of(context).size.width * 0.08),
+                    child: const Text(
                       'Sign In',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: CustomTextFormField(hintText: 'Email Address'),
+                    child: CustomTextFormField(
+                      controller: _emailController,
+                      hintText: 'Email Address',
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty || !value.contains('@')) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: CustomTextFormField(hintText: 'Password'),
+                    child: CustomTextFormField(
+                      controller: _passwordController,
+                      hintText: 'Password',
+                      validator: (value) {
+                        if (value == null || value.trim().length < 5) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: InkWell(
                         onTap: () {
-                          // mezo validation here
-                          Navigator.pushReplacementNamed(
-                              context, MainScreen.routeName);
+                          _loginBloc.add(
+                            LoginEvent.onTappedLogIn(
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            ),
+                          );
+                          // Navigator.pushReplacementNamed(context, MainScreen.routeName);
                         },
                         child: Image.asset('assets/images/signIn.png')),
                   ),
@@ -62,15 +85,14 @@ class LogInScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Don\'t have an account click'),
+                          const Text('Don\'t have an account click'),
                           InkWell(
-                            child: Text(
+                            child: const Text(
                               ' here',
                               style: TextStyle(color: Colors.purpleAccent),
                             ),
                             onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, SignUpScreen.routeName);
+                              Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
                             },
                           )
                         ],
