@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "942497411282",
+    "project_id": "flutter-weddify-app",
+    "storage_bucket": "flutter-weddify-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942497411282:android:bcff02eb17245a7afc7d0b",
+        "android_client_info": {
+          "package_name": "com.example.weddify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA28ctc2NvniR_C0vuJiHajMnSWNr5n6Ow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
