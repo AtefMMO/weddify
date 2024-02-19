@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:weddify/init_route.dart';
+import 'package:weddify/login/user_data.dart';
+import 'package:weddify/offers_screen/offers_tap.dart';
 
 part 'signup_bloc.freezed.dart';
 
@@ -12,6 +16,8 @@ class SignupEvent with _$SignupEvent {
     required String email,
     required String password,
     required String fullName,
+    required bool isAdmin,
+    required BuildContext context
   }) = _onTappedSignupEvent;
 }
 
@@ -34,11 +40,11 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
     final userData = await firebase.createUserWithEmailAndPassword(email: event.email, password: event.password);
 
-    // final storageRef = FirebaseStorage.instance.ref().child('users_images').child('${userData.user!.uid}.jpg'); // create path in firebase
+    //final storageRef = FirebaseStorage.instance.ref().child('users_images').child('${userData.user!.uid}.jpg'); // create path in firebase
 
-    // await storageRef.putFile(selectedImage!); // send the selected image url to firebase
+    //await storageRef.putFile(selectedImage!); // send the selected image url to firebase
 
-    // final imageUrl = await storageRef.getDownloadURL(); // get the image url
+  //  final imageUrl = await storageRef.getDownloadURL(); // get the image url
 
     // await FirebaseFirestore.instance.collection('users').doc(userData.user!.uid).set(
     //   {
@@ -46,9 +52,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     //     'email': event.email,
     //   },
     // );
-
     // put navigation here mr atef
+Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
 
-    emit(state.copyWith(isAuthenticating: false));
   }
 }

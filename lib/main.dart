@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:weddify/init_route.dart';
-import 'package:weddify/login_screen/login_screen.dart';
-import 'package:weddify/login_screen/signup_screen.dart';
+
 import 'package:weddify/market_screen/market_tap.dart';
 
 import 'firebase_options.dart';
+import 'login/login_screen.dart';
+import 'login/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
