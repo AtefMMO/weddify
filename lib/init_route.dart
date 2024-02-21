@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: taps[selectedIndex],
-    /*  appBar: AppBar(
+      /*  appBar: AppBar(
           title: Text('Weddify', style: TextStyle(color: AppTheme.selectedPurble)),
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
