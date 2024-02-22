@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:weddify/init_route.dart';
 
 import 'package:weddify/market_screen/market_tap.dart';
+import 'package:weddify/merchant_screens/merchant_main_screen.dart';
 import 'package:weddify/videos_screen/video_player.dart';
 
 import 'firebase_options.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         MainScreen.routeName: (context) => MainScreen(),
         LogInScreen.routeName: (context) => LogInScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
-        VideoPlayerScreen.routeName:(context)=>VideoPlayerScreen()
+        VideoPlayerScreen.routeName:(context)=>VideoPlayerScreen(),
+        MerchantMainScreen.routeName:(context)=>MerchantMainScreen()
       },
       debugShowCheckedModeBanner: false,
     );
