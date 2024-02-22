@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weddify/notes_screen/note._container.dart';
 
 class Notes extends StatelessWidget {
 
@@ -13,6 +14,28 @@ class Notes extends StatelessWidget {
           height: double.infinity,
           width: double.infinity,
         ),
+        Padding(
+          padding:
+          EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(' Find the Best',style: TextStyle(color:
+                  Colors.white,fontSize: 24)),
+                  Text(' Deals, Anytime,\n Anywhere!',style: TextStyle(color:
+                  Colors.white,fontSize: 26,fontWeight: FontWeight.bold),),
+                  Note(),
+                  Note(),
+                  Note(),
+                  Note(),
+                  Note(),
+                  Note(),
+                ],
+              ),
+            ),
+          ),
+        )
       ],
     );
   }

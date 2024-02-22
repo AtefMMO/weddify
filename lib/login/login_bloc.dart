@@ -2,11 +2,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weddify/custom_widgets/dialog_utils.dart';
 import 'package:weddify/init_route.dart';
 import 'package:weddify/login/signup_bloc.dart';
 import 'package:weddify/login/user_data.dart';
+import 'package:weddify/merchant_screens/merchant_main_screen.dart';
 part 'login_bloc.freezed.dart';
 
 @freezed
@@ -39,15 +41,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       print('${user!.email}'); //all working perfectly firebase is done
       print('${user!.name}');
       print('${user!.id}');
-      Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
+      Fluttertoast.showToast(
+          msg: "Sign in Succesful Welcome ${user!.name}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      if(user.isMerchant){
+        Navigator.pushReplacementNamed(event.context, MerchantMainScreen.routeName);
+      }else{
+        Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
+      }
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        DialogUtils.showMessage(event.context, 'User Not Found',
-            barrierDismissible: true, title: 'Error');
-      } else if (e.code == 'wrong-password') {
-        DialogUtils.showMessage(event.context, 'Wrong password',
-            barrierDismissible: true, title: 'Error');
-      }
+      } else if (e.code == 'wrong-password') {}
+      DialogUtils.showMessage(event.context, 'Wrong Email or Password',
+          barrierDismissible: true, title: 'Error');
     }
   }
 }

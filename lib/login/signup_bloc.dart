@@ -4,6 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weddify/init_route.dart';
 import 'package:weddify/login/user_data.dart';
@@ -50,6 +52,15 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           isAdmin: false,
           isMerchant: false));
       print(credential.user!.uid); //user id
+      Fluttertoast.showToast(
+          msg: "Account Created Succesfuly Welcome ${event.fullName}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
       Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
