@@ -14,7 +14,7 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   var formKey = GlobalKey<FormState>();
 
-  bool hide = false;
+  bool hide = true;
 
   final _emailController = TextEditingController();
 

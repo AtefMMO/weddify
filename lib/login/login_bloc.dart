@@ -42,12 +42,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        DialogUtils.showMessage(event.context, 'User Not Found',
-            barrierDismissible: true, title: 'Error');
-      } else if (e.code == 'wrong-password') {
-        DialogUtils.showMessage(event.context, 'Wrong password',
-            barrierDismissible: true, title: 'Error');
-      }
+      } else if (e.code == 'wrong-password') {}
+      DialogUtils.showMessage(event.context, 'Wrong Email or Password',
+          barrierDismissible: true, title: 'Error');
     }
   }
 }
