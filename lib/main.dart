@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/init_route.dart';
 
 import 'package:weddify/market_screen/market_tap.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           }
           return LogInScreen();
         },
-      ),
+      ),theme:AppTheme.appTheme ,
       initialRoute: LogInScreen.routeName, //MainScreen.routeName,
       routes: {
         MainScreen.routeName: (context) => MainScreen(),
@@ -42,5 +43,6 @@ class MyApp extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
     );
+
   }
 }

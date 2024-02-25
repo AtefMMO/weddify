@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weddify/offers_screen/offer_container.dart';
 
 class Offers extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Stack(
