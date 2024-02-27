@@ -45,6 +45,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         email: event.email,
         password: event.password,
       );
+      DialogUtils.showLoading(event.context, 'Loading...');
       await UserFirebaseUtils.addUserToDb(UserData(
           email: event.email,
           name: event.fullName,
@@ -52,6 +53,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           isAdmin: false,
           isMerchant: false));
       print(credential.user!.uid); //user id
+
       Fluttertoast.showToast(
           msg: "Account Created Succesfuly Welcome ${event.fullName}",
           toastLength: Toast.LENGTH_SHORT,
@@ -59,8 +61,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.green,
           textColor: Colors.white,
-          fontSize: 16.0
-      );
+          fontSize: 16.0);
       Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

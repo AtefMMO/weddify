@@ -17,6 +17,7 @@ import 'login/signup_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Future.delayed(Duration(seconds: 3));
   runApp(MyApp());
 }
 
