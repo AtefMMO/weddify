@@ -15,7 +15,7 @@ class Offers extends StatelessWidget {
         ),
         Padding(
           padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Center(
             child: SingleChildScrollView(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start,

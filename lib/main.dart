@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         MerchantMainScreen.routeName:(context)=>MerchantMainScreen()
       },
       debugShowCheckedModeBanner: false,
+      
     );
 
   }
