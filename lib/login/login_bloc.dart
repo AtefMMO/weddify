@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -34,10 +35,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   FutureOr<void> _onTapLogIn(
       _onTappedSaveLoginEvent event, Emitter<LoginState> emit) async {
     try {
-
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: event.email, password: event.password);
-      DialogUtils.showLoading(event.context,'Loading...');
+      DialogUtils.showLoading(event.context, 'Loading...');
       UserData? user = await UserFirebaseUtils.readUserFromDb(credential
           .user!.uid); // this is the user data mazen from firestore db
       print('${user!.email}'); //all working perfectly firebase is done
@@ -51,14 +51,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.green,
           textColor: Colors.white,
-          fontSize: 16.0
-      );
-      if(user.isMerchant){
-        Navigator.pushReplacementNamed(event.context, MerchantMainScreen.routeName);
-      }else{
-        Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
+          fontSize: 16.0);
+      if (user.isMerchant) {
+        Navigator.pushAndRemoveUntil(
+          event.context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return MerchantMainScreen();
+          }),
+          (route) => false,
+        );
+      } else {
+        Navigator.pushAndRemoveUntil(
+          event.context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return MainScreen();
+          }),
+              (route) => false,
+        );
       }
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
       } else if (e.code == 'wrong-password') {}

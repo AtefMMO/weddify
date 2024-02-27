@@ -62,7 +62,13 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           backgroundColor: Colors.green,
           textColor: Colors.white,
           fontSize: 16.0);
-      Navigator.pushReplacementNamed(event.context, MainScreen.routeName);
+      Navigator.pushAndRemoveUntil(
+        event.context,
+        MaterialPageRoute(builder: (BuildContext context) {
+          return MainScreen();
+        }),
+        (route) => false,
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         DialogUtils.showMessage(event.context, 'Weak Password',
