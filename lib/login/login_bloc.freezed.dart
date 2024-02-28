@@ -85,7 +85,7 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? context = freezed,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -96,7 +96,7 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      context: freezed == context
+      context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as BuildContext,
@@ -130,7 +130,7 @@ class __$$onTappedSaveLoginEventImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? context = freezed,
+    Object? context = null,
   }) {
     return _then(_$onTappedSaveLoginEventImpl(
       email: null == email
@@ -141,7 +141,7 @@ class __$$onTappedSaveLoginEventImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      context: freezed == context
+      context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as BuildContext,
@@ -175,12 +175,11 @@ class _$onTappedSaveLoginEventImpl implements _onTappedSaveLoginEvent {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
-            const DeepCollectionEquality().equals(other.context, context));
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password,
-      const DeepCollectionEquality().hash(context));
+  int get hashCode => Object.hash(runtimeType, email, password, context);
 
   @JsonKey(ignore: true)
   @override

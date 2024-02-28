@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weddify/offers_screen/offer_container.dart';
 
 class Offers extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -14,16 +13,17 @@ class Offers extends StatelessWidget {
           width: double.infinity,
         ),
         Padding(
-          padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Center(
             child: SingleChildScrollView(
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(' Find the Best',style: TextStyle(color:
-                Colors.white,fontSize: 24)),
-                  Text(' Deals, Anytime,\n Anywhere!',style: TextStyle(color:
-                  Colors.white,fontSize: 26,fontWeight: FontWeight.bold),),
+                  Text(' Find the Best', style: TextStyle(color: Colors.white, fontSize: 24)),
+                  Text(
+                    ' Deals, Anytime,\n Anywhere!',
+                    style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+                  ),
                   Offer(),
                   Offer(),
                   Offer(),
