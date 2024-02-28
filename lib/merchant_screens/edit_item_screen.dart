@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class EditItemScreen extends StatefulWidget {
-
   @override
   State<EditItemScreen> createState() => _EditItemScreenState();
 }
 
 class _EditItemScreenState extends State<EditItemScreen> {
-var formKey=GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
 
-String itemName='Item',itemPrice='111',itemDescription='My New Item';
+  String itemName = 'Item', itemPrice = '111', itemDescription = 'My New Item';
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(8),
+        height: MediaQuery.of(context).size.height * 0.9,
+        padding: const EdgeInsets.all(8),
         color: Theme.of(context).cardColor,
         child: Column(
           children: [
@@ -24,20 +24,19 @@ String itemName='Item',itemPrice='111',itemDescription='My New Item';
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Padding(
-                padding: EdgeInsets.all(25),
+                padding: const EdgeInsets.all(25),
                 child: Form(
                   key: formKey,
                   child: Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(initialValue: itemName,
+                        child: TextFormField(
+                          initialValue: itemName,
                           decoration: InputDecoration(
                               hintText: 'Enter Item title',
                               hintStyle: Theme.of(context).textTheme.titleSmall,
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 1, color: Colors.black))),
+                              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Invalid Item Name';
@@ -50,13 +49,12 @@ String itemName='Item',itemPrice='111',itemDescription='My New Item';
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(initialValue: itemPrice,
+                        child: TextFormField(
+                          initialValue: itemPrice,
                           decoration: InputDecoration(
                               hintText: 'Enter Item price',
                               hintStyle: Theme.of(context).textTheme.titleSmall,
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 1, color: Colors.black))),
+                              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Invalid Item price';
@@ -67,18 +65,17 @@ String itemName='Item',itemPrice='111',itemDescription='My New Item';
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(initialValue: itemDescription,
+                        child: TextFormField(
+                          initialValue: itemDescription,
                           decoration: InputDecoration(
                             hintText: 'Enter Item description',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                BorderSide(width: 1, color: Colors.black)),
+                            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
                           ),
                           maxLines: 3,
                           validator: (value) {
@@ -95,10 +92,7 @@ String itemName='Item',itemPrice='111',itemDescription='My New Item';
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
                           'Select Item Image',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall!
-                              .copyWith(color: Colors.black),
+                          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -108,11 +102,11 @@ String itemName='Item',itemPrice='111',itemDescription='My New Item';
                           height: MediaQuery.of(context).size.height * 0.1,
                           width: MediaQuery.of(context).size.width * 0.2,
                           color: Colors.grey,
-                          child: Center(
+                          child: const Center(
                               child: Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              )),
+                            Icons.add,
+                            color: Colors.white,
+                          )),
                         ),
                       ),
                       Padding(
@@ -123,7 +117,7 @@ String itemName='Item',itemPrice='111',itemDescription='My New Item';
                                 //add item to db
                               }
                             },
-                            child: Text(
+                            child: const Text(
                               'Edit Item',
                               style: TextStyle(fontSize: 18),
                             )),
