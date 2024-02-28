@@ -17,19 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MerchantEvent {
   ItemModel get itemModel => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ItemModel itemModel) onAddItem,
+    required TResult Function(ItemModel itemModel, String userId) onAddItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ItemModel itemModel)? onAddItem,
+    TResult? Function(ItemModel itemModel, String userId)? onAddItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ItemModel itemModel)? onAddItem,
+    TResult Function(ItemModel itemModel, String userId)? onAddItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +62,7 @@ abstract class $MerchantEventCopyWith<$Res> {
           MerchantEvent value, $Res Function(MerchantEvent) then) =
       _$MerchantEventCopyWithImpl<$Res, MerchantEvent>;
   @useResult
-  $Res call({ItemModel itemModel});
+  $Res call({ItemModel itemModel, String userId});
 }
 
 /// @nodoc
@@ -78,12 +79,17 @@ class _$MerchantEventCopyWithImpl<$Res, $Val extends MerchantEvent>
   @override
   $Res call({
     Object? itemModel = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       itemModel: null == itemModel
           ? _value.itemModel
           : itemModel // ignore: cast_nullable_to_non_nullable
               as ItemModel,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -97,7 +103,7 @@ abstract class _$$onAddItemMerchantEventImplCopyWith<$Res>
       __$$onAddItemMerchantEventImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ItemModel itemModel});
+  $Res call({ItemModel itemModel, String userId});
 }
 
 /// @nodoc
@@ -113,12 +119,17 @@ class __$$onAddItemMerchantEventImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? itemModel = null,
+    Object? userId = null,
   }) {
     return _then(_$onAddItemMerchantEventImpl(
       itemModel: null == itemModel
           ? _value.itemModel
           : itemModel // ignore: cast_nullable_to_non_nullable
               as ItemModel,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -126,14 +137,16 @@ class __$$onAddItemMerchantEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$onAddItemMerchantEventImpl implements _onAddItemMerchantEvent {
-  _$onAddItemMerchantEventImpl({required this.itemModel});
+  _$onAddItemMerchantEventImpl({required this.itemModel, required this.userId});
 
   @override
   final ItemModel itemModel;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'MerchantEvent.onAddItem(itemModel: $itemModel)';
+    return 'MerchantEvent.onAddItem(itemModel: $itemModel, userId: $userId)';
   }
 
   @override
@@ -142,11 +155,12 @@ class _$onAddItemMerchantEventImpl implements _onAddItemMerchantEvent {
         (other.runtimeType == runtimeType &&
             other is _$onAddItemMerchantEventImpl &&
             (identical(other.itemModel, itemModel) ||
-                other.itemModel == itemModel));
+                other.itemModel == itemModel) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemModel);
+  int get hashCode => Object.hash(runtimeType, itemModel, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -158,27 +172,27 @@ class _$onAddItemMerchantEventImpl implements _onAddItemMerchantEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ItemModel itemModel) onAddItem,
+    required TResult Function(ItemModel itemModel, String userId) onAddItem,
   }) {
-    return onAddItem(itemModel);
+    return onAddItem(itemModel, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ItemModel itemModel)? onAddItem,
+    TResult? Function(ItemModel itemModel, String userId)? onAddItem,
   }) {
-    return onAddItem?.call(itemModel);
+    return onAddItem?.call(itemModel, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ItemModel itemModel)? onAddItem,
+    TResult Function(ItemModel itemModel, String userId)? onAddItem,
     required TResult orElse(),
   }) {
     if (onAddItem != null) {
-      return onAddItem(itemModel);
+      return onAddItem(itemModel, userId);
     }
     return orElse();
   }
@@ -213,11 +227,14 @@ class _$onAddItemMerchantEventImpl implements _onAddItemMerchantEvent {
 }
 
 abstract class _onAddItemMerchantEvent implements MerchantEvent {
-  factory _onAddItemMerchantEvent({required final ItemModel itemModel}) =
-      _$onAddItemMerchantEventImpl;
+  factory _onAddItemMerchantEvent(
+      {required final ItemModel itemModel,
+      required final String userId}) = _$onAddItemMerchantEventImpl;
 
   @override
   ItemModel get itemModel;
+  @override
+  String get userId;
   @override
   @JsonKey(ignore: true)
   _$$onAddItemMerchantEventImplCopyWith<_$onAddItemMerchantEventImpl>

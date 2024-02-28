@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:weddify/login/user_data.dart';
 import 'package:weddify/merchant_screens/merchant_bloc.dart';
 import 'package:weddify/merchant_screens/user_image_picker.dart';
 import 'package:weddify/models/item_model.dart';
@@ -15,8 +14,7 @@ class AddItemScreen extends StatefulWidget {
 class _AddItemScreenState extends State<AddItemScreen> {
   var formKey = GlobalKey<FormState>();
 
-  String itemName = '', description = '', itemPrice = '';
-  File? selectedImage;
+  UserData? _userData;
   ItemModel? _itemModel;
 
   final MerchantBloc _merchantBloc = MerchantBloc();
@@ -73,7 +71,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel()));
+            _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel(), userId: _userData!.id));
           }
         },
         child: const Text(
@@ -89,7 +87,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       padding: const EdgeInsets.all(8.0),
       child: UserImagePicker(
         onPickImage: (pickedImage) {
-          selectedImage = pickedImage;
+          _itemModel!.selectedImage = pickedImage;
         },
       ),
     );
@@ -111,7 +109,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
           }
         },
         onChanged: (value) {
-          description = value;
+          _itemModel!.description = value;
         },
       ),
     );
@@ -131,7 +129,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
           }
         },
         onChanged: (value) {
-          itemPrice = value;
+          _itemModel!.price = value;
         },
       ),
     );

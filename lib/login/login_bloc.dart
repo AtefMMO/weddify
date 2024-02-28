@@ -39,9 +39,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: event.email, password: event.password);
       DialogUtils.showLoading(event.context, 'Loading...');
       UserData? user = await UserFirebaseUtils.readUserFromDb(credential.user!.uid); // this is the user data mazen from firestore db
-      print('${user!.email}'); //all working perfectly firebase is done
-      print('${user!.name}');
-      print('${user!.id}');
 
       Fluttertoast.showToast(
           msg: "Sign in Succesful Welcome ${user!.name}",

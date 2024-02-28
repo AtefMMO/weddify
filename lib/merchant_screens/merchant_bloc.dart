@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:weddify/login/user_data.dart';
 
 import '../models/item_model.dart';
 
@@ -10,7 +10,10 @@ part 'merchant_bloc.freezed.dart';
 
 @freezed
 class MerchantEvent with _$MerchantEvent {
-  factory MerchantEvent.onAddItem({required ItemModel itemModel}) = _onAddItemMerchantEvent;
+  factory MerchantEvent.onAddItem({
+    required ItemModel itemModel,
+    required String userId,
+  }) = _onAddItemMerchantEvent;
 }
 
 @freezed

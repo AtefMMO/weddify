@@ -44,7 +44,6 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       DialogUtils.showLoading(event.context, 'Loading...');
       await UserFirebaseUtils.addUserToDb(
           UserData(email: event.email, name: event.fullName, id: credential.user!.uid, isAdmin: false, isMerchant: false));
-      print(credential.user!.uid); //user id
 
       Fluttertoast.showToast(
           msg: "Account Created Succesfuly Welcome ${event.fullName}",
