@@ -1,3 +1,4 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,5 +18,7 @@ class OffersState with _$OffersState {
 }
 
 class OffersBloc extends Bloc<OffersEvent, OffersState> {
-  OffersBloc() : super(OffersState()) {}
+  OffersBloc() : super(OffersState()) {
+
+  }
 }
