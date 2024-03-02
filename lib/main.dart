@@ -1,8 +1,7 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:weddify/admin_screens/admin_main_screen.dart';
 import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/init_route.dart';
 
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StreamBuilder(
+      home: StreamBuilder( //i donot understand
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -33,18 +32,18 @@ class MyApp extends StatelessWidget {
           }
           return LogInScreen();
         },
-      ),theme:AppTheme.appTheme ,
-      initialRoute: LogInScreen.routeName, //MainScreen.routeName,
+      ),
+      theme: AppTheme.appTheme,
+      initialRoute: MainScreenAdmin.routeName, //MainScreen.routeName,
       routes: {
         MainScreen.routeName: (context) => MainScreen(),
         LogInScreen.routeName: (context) => LogInScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
-        VideoPlayerScreen.routeName:(context)=>VideoPlayerScreen(),
-        MerchantMainScreen.routeName:(context)=>MerchantMainScreen()
+        VideoPlayerScreen.routeName: (context) => VideoPlayerScreen(),
+        MerchantMainScreen.routeName: (context) => MerchantMainScreen(),
+        MainScreenAdmin.routeName: (context) => MainScreenAdmin()
       },
       debugShowCheckedModeBanner: false,
-      
     );
-
   }
 }
