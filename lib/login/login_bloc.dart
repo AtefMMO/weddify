@@ -7,9 +7,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weddify/custom_widgets/dialog_utils.dart';
 import 'package:weddify/init_route.dart';
-import 'package:weddify/login/signup_bloc.dart';
 import 'package:weddify/login/user_data.dart';
 import 'package:weddify/merchant_screens/merchant_main_screen.dart';
+
+import '../firebase_utils.dart';
 
 part 'login_bloc.freezed.dart';
 
@@ -48,7 +49,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           backgroundColor: Colors.green,
           textColor: Colors.white,
           fontSize: 16.0);
-      if (user.isMerchant) {
+      if (user.isMerchant ?? false) {
         Navigator.pushAndRemoveUntil(
           event.context,
           MaterialPageRoute(builder: (BuildContext context) {

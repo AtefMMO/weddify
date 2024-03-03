@@ -1,26 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
-
 class UserData {
   static const String collectionName = 'user';
-  String name = '';
-  String email = '';
+  String? name;
+  String? email;
   String id = '';
-  bool isAdmin = false;
-  bool isMerchant = false;
-  UserData(
-      {required this.email,
-      required this.name,
-      required this.id,
-      required this.isAdmin,
-      required this.isMerchant});
+  bool? isAdmin = false;
+  bool? isMerchant = false;
+  UserData({
+    this.email,
+    this.name,
+    required this.id,
+    this.isAdmin,
+    this.isMerchant,
+  });
   Map<String, dynamic> toFireStore() {
-    return {
-      'name': name,
-      'email': email,
-      'id': id,
-      'isAdmin': isAdmin,
-      'isMerchant': isMerchant
-    };
+    return {'name': name, 'email': email, 'id': id, 'isAdmin': isAdmin, 'isMerchant': isMerchant};
   }
 
   UserData.fromJson(Map<String, dynamic> userData) {

@@ -71,7 +71,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel(), userId: _userData!.id));
+            _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel(), id: _userData!.id));
           }
         },
         child: const Text(
@@ -87,7 +87,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       padding: const EdgeInsets.all(8.0),
       child: UserImagePicker(
         onPickImage: (pickedImage) {
-          _itemModel!.selectedImage = pickedImage;
+          // _itemModel!.selectedImage = pickedImage;
         },
       ),
     );
