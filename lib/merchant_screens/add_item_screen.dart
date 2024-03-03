@@ -15,10 +15,14 @@ class _AddItemScreenState extends State<AddItemScreen> {
   var formKey = GlobalKey<FormState>();
 
   UserData? _userData;
-  ItemModel? _itemModel;
+  late ItemModel _itemModel;
 
   final MerchantBloc _merchantBloc = MerchantBloc();
-
+  @override
+  void initState() {
+    super.initState();
+    _itemModel = ItemModel(); // Initialize _itemModel in initState
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -71,7 +75,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel(), id: _userData!.id));
+            print('${_itemModel.description}');
+            print('${_itemModel.title}');
+            print('${_itemModel.price}');
+          //  _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel(), id: _userData!.id));
           }
         },
         child: const Text(
@@ -109,7 +116,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
           }
         },
         onChanged: (value) {
-          _itemModel!.description = value;
+          _itemModel?.description = value;
         },
       ),
     );
@@ -128,9 +135,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
             return 'Invalid Item price';
           }
         },
-        onChanged: (value) {
-          _itemModel!.price = value;
-        },
+      onChanged: (value) {
+          _itemModel?.price = value;
+          print('${_itemModel.price}');
+        }
       ),
     );
   }
