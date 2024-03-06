@@ -6,7 +6,7 @@ class FirebaseUtils {
   static CollectionReference<OfferData> getOfferCollection() {
     // Return the collection reference to the "offers" collection
     return FirebaseFirestore.instance
-        .collection('offers')
+        .collection(OfferData.collectionName)
         .withConverter<OfferData>(
           fromFirestore: (snapshot, options) =>
               OfferData.fromJson(snapshot.data()!),

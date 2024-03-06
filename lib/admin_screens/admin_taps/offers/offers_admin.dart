@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/add_offer_screen.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/offer_container_admin.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
-import 'package:weddify/offers_screen/offer_container.dart';
 
 class OffersAdmin extends StatefulWidget {
   @override

@@ -30,7 +30,7 @@ class Notes extends StatelessWidget {
                   Note(),
                   Note(),
                   Note(),
-                  Note(),
+
                 ],
               ),
             ),
