@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
-import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
+import 'package:weddify/admin_screens/admin_taps/notes/add_note_to_firebase.dart';
+import 'package:weddify/admin_screens/admin_taps/notes/note_model.dart';
 
-class EditOfferScreen extends StatelessWidget {
+
+class EditNoteScreen extends StatefulWidget {
+  late NoteData note;
+
+  EditNoteScreen({required this.note});
+
+  @override
+  State<EditNoteScreen> createState() => _EditNoteScreenState();
+}
+
+class _EditNoteScreenState extends State<EditNoteScreen> {
   var formKey = GlobalKey<FormState>();
-
-late OfferData offer;
-
-
-
-
-
-EditOfferScreen({required this.offer});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ EditOfferScreen({required this.offer});
         child: Column(
           children: [
             Text(
-              'Edit Offer',
+              'Edit Note',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Padding(
@@ -36,57 +38,58 @@ EditOfferScreen({required this.offer});
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: offer.title,
+                          initialValue: widget.note.title,
                           decoration: InputDecoration(
-                              hintText: 'Enter Offer title',
+                              hintText: 'Enter Note title',
                               hintStyle: Theme.of(context).textTheme.titleSmall,
-                              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                              enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1, color: Colors.black))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Invalid Offer title';
+                              return 'Invalid Note title';
                             }
                           },
                           onChanged: (value) {
-                            offer.title = value;
+                            widget.note.title = value;
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 15,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: offer.description,
+                          initialValue: widget.note.description,
                           decoration: InputDecoration(
-                            hintText: 'Enter Offer description',
+                            hintText: 'Enter Note description',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
-                            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
+                            enabledBorder: const UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.black)),
                           ),
                           maxLines: 3,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Invalid Offer description';
+                              return 'Invalid Note description';
                             }
                           },
                           onChanged: (value) {
-                            offer.description = value;
+                            widget.note.description = value;
                           },
                         ),
                       ),
-
-
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                               editOffer(context);
+                                editNote(context);
                               }
                             },
                             child: const Text(
-                              'Edit Offer',
+                              'Edit Note',
                               style: TextStyle(fontSize: 18),
                             )),
                       )
@@ -99,14 +102,12 @@ EditOfferScreen({required this.offer});
     );
   }
 
-  editOffer(BuildContext context){
-
-    FirebaseUtils.updateData(offer
-       );
+  editNote(BuildContext context) {
+    FirebaseUtils.updateData(widget.note);
     Navigator.pop(context);
 
     Fluttertoast.showToast(
-        msg: "Task Edited Successfully",
+        msg: "Note Edited Successfully",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

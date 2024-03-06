@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
-import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
+import 'package:weddify/admin_screens/admin_taps/notes/add_note_to_firebase.dart';
+import 'package:weddify/admin_screens/admin_taps/notes/note_model.dart';
 
-class EditOfferScreen extends StatelessWidget {
+
+class AddNoteScreen extends StatefulWidget {
+  @override
+  State<AddNoteScreen> createState() => _AddOfferScreenState();
+}
+
+class _AddOfferScreenState extends State<AddNoteScreen> {
   var formKey = GlobalKey<FormState>();
 
-late OfferData offer;
-
-
-
-
-
-EditOfferScreen({required this.offer});
+  String noteName = 'Note title', noteDescription = 'Note description';
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ EditOfferScreen({required this.offer});
         child: Column(
           children: [
             Text(
-              'Edit Offer',
+              'Add Note',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Padding(
@@ -36,57 +36,54 @@ EditOfferScreen({required this.offer});
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: offer.title,
                           decoration: InputDecoration(
-                              hintText: 'Enter Offer title',
+                              hintText: 'Enter Note title',
                               hintStyle: Theme.of(context).textTheme.titleSmall,
-                              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                              enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1, color: Colors.black))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Invalid Offer title';
+                              return 'Invalid Note Name';
                             }
                           },
                           onChanged: (value) {
-                            offer.title = value;
+                            noteName = value;
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 15,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: offer.description,
                           decoration: InputDecoration(
-                            hintText: 'Enter Offer description',
+                            hintText: 'Enter Note description',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
-                            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
+                            enabledBorder: const UnderlineInputBorder(
+                                borderSide:
+                                BorderSide(width: 1, color: Colors.black)),
                           ),
                           maxLines: 3,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Invalid Offer description';
+                              return 'Invalid Note description';
                             }
                           },
                           onChanged: (value) {
-                            offer.description = value;
+                            noteDescription = value;
                           },
                         ),
                       ),
-
-
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: ElevatedButton(
                             onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                               editOffer(context);
-                              }
+                              addOffer();
                             },
                             child: const Text(
-                              'Edit Offer',
+                              'Add Note',
                               style: TextStyle(fontSize: 18),
                             )),
                       )
@@ -99,19 +96,39 @@ EditOfferScreen({required this.offer});
     );
   }
 
-  editOffer(BuildContext context){
+  void addOffer() async {
+    if (formKey.currentState!.validate()) {
+      NoteData note = NoteData(
+        title: noteName,
+        description: noteDescription,
+      );
 
-    FirebaseUtils.updateData(offer
-       );
-    Navigator.pop(context);
-
-    Fluttertoast.showToast(
-        msg: "Task Edited Successfully",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0);
+      try {
+        await FirebaseUtils.addNoteToFirebase(note);
+        print('Note Added Successfully');
+        Navigator.pop(context);
+        Fluttertoast.showToast(
+          msg: "Note Added Successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      } catch (e) {
+        print('Error adding Note: $e');
+        // Handle error adding note to Firebase
+        Fluttertoast.showToast(
+          msg: "Failed to add Note. Please try again.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+    }
   }
 }

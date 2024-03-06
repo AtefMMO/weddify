@@ -1,11 +1,11 @@
-class OfferData {
+class NoteData {
   //data class used to save task in the data base
-  static const String collectionName = 'Offers';
+  static const String collectionName = 'Notes';
   String? id;
   String? title;
   String? description;
 
-  OfferData({
+  NoteData({
     this.id = '',
     required this.title,
     required this.description,
@@ -19,7 +19,7 @@ class OfferData {
     };
   }
 
-  OfferData.fromJson(Map<String, dynamic> taskData) {
+  NoteData.fromJson(Map<String, dynamic> taskData) {
     id = taskData['id'] as String?;
     title = taskData['title'];
     description = taskData['description'];
