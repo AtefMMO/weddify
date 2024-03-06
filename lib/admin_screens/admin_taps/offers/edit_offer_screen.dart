@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
 
-class EditOfferScreen extends StatefulWidget {
-  @override
-  State<EditOfferScreen> createState() => _EditOfferScreenState();
-}
-
-class _EditOfferScreenState extends State<EditOfferScreen> {
+class EditOfferScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
 
-  String itemName = 'Offer title', itemDescription = 'Offer description';
+late OfferData offer;
+
+
+
+
+
+EditOfferScreen({required this.offer});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class _EditOfferScreenState extends State<EditOfferScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: itemName,
+                          initialValue: offer.title,
                           decoration: InputDecoration(
                               hintText: 'Enter Offer title',
                               hintStyle: Theme.of(context).textTheme.titleSmall,
@@ -43,7 +47,7 @@ class _EditOfferScreenState extends State<EditOfferScreen> {
                             }
                           },
                           onChanged: (value) {
-                            itemName = value;
+                            offer.title = value;
                           },
                         ),
                       ),
@@ -54,7 +58,7 @@ class _EditOfferScreenState extends State<EditOfferScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: itemDescription,
+                          initialValue: offer.description,
                           decoration: InputDecoration(
                             hintText: 'Enter Offer description',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
@@ -67,7 +71,7 @@ class _EditOfferScreenState extends State<EditOfferScreen> {
                             }
                           },
                           onChanged: (value) {
-                            itemDescription = value;
+                            offer.description = value;
                           },
                         ),
                       ),
@@ -78,7 +82,7 @@ class _EditOfferScreenState extends State<EditOfferScreen> {
                         child: ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                //add item to db
+                               editOffer(context);
                               }
                             },
                             child: const Text(
@@ -93,5 +97,21 @@ class _EditOfferScreenState extends State<EditOfferScreen> {
         ),
       ),
     );
+  }
+
+  editOffer(BuildContext context){
+
+    FirebaseUtils.updateData(offer
+       );
+    Navigator.pop(context);
+
+    Fluttertoast.showToast(
+        msg: "Task Edited Successfully",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }

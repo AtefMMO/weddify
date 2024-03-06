@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
 
-class AddOfferScreen extends StatelessWidget {
+class AddOfferScreen extends StatefulWidget {
+  @override
+  State<AddOfferScreen> createState() => _AddOfferScreenState();
+}
 
+class _AddOfferScreenState extends State<AddOfferScreen> {
   var formKey = GlobalKey<FormState>();
 
-  String itemName = 'Offer title', itemDescription = 'Offer description';
+  String offerName = 'Offer title', offerDescription = 'Offer description';
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -27,33 +35,34 @@ class AddOfferScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-
                           decoration: InputDecoration(
                               hintText: 'Enter Offer title',
                               hintStyle: Theme.of(context).textTheme.titleSmall,
-                              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                              enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1, color: Colors.black))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Invalid Offer Name';
                             }
                           },
                           onChanged: (value) {
-                            itemName = value;
+                            offerName = value;
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 15,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-
                           decoration: InputDecoration(
                             hintText: 'Enter Offer description',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
-                            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
+                            enabledBorder: const UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.black)),
                           ),
                           maxLines: 3,
                           validator: (value) {
@@ -62,19 +71,15 @@ class AddOfferScreen extends StatelessWidget {
                             }
                           },
                           onChanged: (value) {
-                            itemDescription = value;
+                            offerDescription = value;
                           },
                         ),
                       ),
-
-
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: ElevatedButton(
                             onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                //add item to db
-                              }
+                              addOffer();
                             },
                             child: const Text(
                               'Add Offer',
@@ -88,5 +93,41 @@ class AddOfferScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void addOffer() async {
+    if (formKey.currentState!.validate()) {
+      OfferData offer = OfferData(
+        title: offerName,
+        description: offerDescription,
+      );
+
+      try {
+        await FirebaseUtils.addOfferToFirebase(offer);
+        print('Offer Added Successfully');
+        Navigator.pop(context);
+        Fluttertoast.showToast(
+          msg: "Offer Added Successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      } catch (e) {
+        print('Error adding offer: $e');
+        // Handle error adding offer to Firebase
+        Fluttertoast.showToast(
+          msg: "Failed to add offer. Please try again.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+    }
   }
 }

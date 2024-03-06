@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/edit_offer_screen.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
 import 'package:weddify/merchant_screens/edit_item_screen.dart';
 
 class offerContainerAdmin extends StatelessWidget {
+late OfferData offer;
+  offerContainerAdmin({required this.offer});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,6 +20,7 @@ class offerContainerAdmin extends StatelessWidget {
           children: [
             SlidableAction(
               onPressed: (context) {
+                deleteOffer(offer);
                 Fluttertoast.showToast(
                     msg: "Offer Deleted Successfully",
                     toastLength: Toast.LENGTH_SHORT,
@@ -59,7 +64,7 @@ class offerContainerAdmin extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'Item',
+                       offer.title??'title',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
@@ -68,7 +73,7 @@ class offerContainerAdmin extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  showEditScreen(context);
+                  showEditScreen(context,offer);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(2),
@@ -89,8 +94,11 @@ class offerContainerAdmin extends StatelessWidget {
     );
   }
 
-  void showEditScreen(BuildContext context) {
+  void showEditScreen(BuildContext context,OfferData offer) {
     showModalBottomSheet(
-        context: context, builder: (context) => EditOfferScreen());
+        context: context, builder: (context) => EditOfferScreen(offer: offer));
+  }
+  deleteOffer(OfferData offer){
+    FirebaseUtils.deleteData(offer);
   }
 }

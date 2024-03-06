@@ -1,9 +1,41 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/add_offer_screen.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/offer_container_admin.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
 import 'package:weddify/offers_screen/offer_container.dart';
 
-class OffersAdmin extends StatelessWidget {
+class OffersAdmin extends StatefulWidget {
+  @override
+  State<OffersAdmin> createState() => _OffersAdminState();
+}
+
+class _OffersAdminState extends State<OffersAdmin> {
+  late List<OfferData> offers;
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    CircularProgressIndicator();
+    loadOffers();
+  }
+
+  void loadOffers() async {
+    // Set isLoading to true when loading starts
+    setState(() {
+      isLoading = true;
+    });
+
+    // Retrieve offers asynchronously and assign them to the offers variable
+    offers = await FirebaseUtils.getOfferFromFireBase();
+
+    // Set isLoading to false when loading finishes
+    setState(() {
+      isLoading = false;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -15,31 +47,48 @@ class OffersAdmin extends StatelessWidget {
           width: double.infinity,
         ),
         Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
+          padding:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+          child: Column(
+            children: [
+              Row(
+
+                children: [
+                  ElevatedButton(
                     onPressed: () {
                       showAddOfferScreen(context);
+
                     },
                     child: Text('Add offer'),
                   ),
+                  SizedBox(width: 10,),
+                  ElevatedButton(
+                    onPressed: () {
+                      loadOffers();
+
+                    },
+                    child: Text('ReLoad'),
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+
+              isLoading ?Center(child: CircularProgressIndicator(color: Colors.white,)):   Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return offerContainerAdmin(
+                    offer: offers[index],);
+                  },
+                  itemCount: offers.length,
                 ),
-                offerContainerAdmin(),
-                offerContainerAdmin(),
-                offerContainerAdmin(),
-                offerContainerAdmin(),
-              ],
-            ),
+              )
+            ],
           ),
         )
       ],
     );
   }
+
   void showAddOfferScreen(BuildContext context) {
     showModalBottomSheet(
         context: context, builder: (context) => AddOfferScreen());
