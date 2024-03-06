@@ -35,7 +35,7 @@ class VideosAdmin extends StatelessWidget {
                   AdminVideoItem(),
                   AdminVideoItem(),
                   AdminVideoItem(),
-                  AdminVideoItem()
+
                 ],
               ),
             ),
