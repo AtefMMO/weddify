@@ -64,7 +64,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           }),
           (route) => false,
         );
-      } else if (user.isAdmin) {
+      } else if (user.isAdmin ?? false) {
         Navigator.pushAndRemoveUntil(
           event.context,
           MaterialPageRoute(builder: (BuildContext context) {

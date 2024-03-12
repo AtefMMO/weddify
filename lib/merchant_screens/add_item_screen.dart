@@ -78,7 +78,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
             print('${_itemModel.description}');
             print('${_itemModel.title}');
             print('${_itemModel.price}');
-          //  _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel(), id: _userData!.id));
+           _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel , id: _userData!.id));
           }
         },
         child: const Text(

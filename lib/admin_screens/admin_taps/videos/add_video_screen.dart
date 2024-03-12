@@ -72,8 +72,7 @@ class _AddVideoScreenState extends State<AddVideoScreen> {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            _merchantBloc.add(
-                MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel()));
+
           }
         },
         child: const Text(

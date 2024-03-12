@@ -31,12 +31,7 @@ class UserFirebaseUtils {
         );
   }
 
-  // static CollectionReference addMerchantCollection(String id) {
-  //   return getUserCollection().doc(id).collection('merchant').withConverter<ItemModel>(
-  //         fromFirestore: (snapshot, options) => ItemModel.fromJson(snapshot.data()!),
-  //         toFirestore: (item, options) => item.toFireStore(),
-  //       );
-  // }
+
 
   static Future<void> addItemToDb(ItemModel item, String id) {
     return getItemCollection(id).set(item);

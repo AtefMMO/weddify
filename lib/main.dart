@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       theme: AppTheme.appTheme,
-      initialRoute: MainScreenAdmin.routeName, //MainScreen.routeName,
+      initialRoute: LogInScreen.routeName, //MainScreen.routeName,
       routes: {
         MainScreen.routeName: (context) => MainScreen(),
         LogInScreen.routeName: (context) => LogInScreen(),
