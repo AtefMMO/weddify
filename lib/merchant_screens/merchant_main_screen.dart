@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/merchant_screens/add_item_screen.dart';
@@ -6,7 +7,9 @@ import 'package:weddify/merchant_screens/settings_screen.dart';
 
 class MerchantMainScreen extends StatefulWidget {
   static const String routeName = 'MerchantMainScreen';
+  final String id;
 
+  const MerchantMainScreen({super.key, required this.id});
   @override
   State<MerchantMainScreen> createState() => _MerchantMainScreenState();
 }
@@ -63,6 +66,10 @@ class _MerchantMainScreenState extends State<MerchantMainScreen> {
   }
 
   ShowAddTaskBottomSheet() {
-    showModalBottomSheet(context: context, builder: (context) => const AddItemScreen());
+    showModalBottomSheet(
+        context: context,
+        builder: (context) => AddItemScreen(
+              id: widget.id,
+            ));
   }
 }
