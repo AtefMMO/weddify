@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weddify/merchant_screens/merchant_bloc.dart';
+
 import 'package:weddify/merchant_screens/user_image_picker.dart';
-import 'package:weddify/models/item_model.dart';
+
 
 class AddVideoScreen extends StatefulWidget {
   const AddVideoScreen({super.key});
@@ -16,9 +16,9 @@ class _AddVideoScreenState extends State<AddVideoScreen> {
   var formKey = GlobalKey<FormState>();
 
   File? selectedImage;
-  ItemModel? _itemModel;
 
-  final MerchantBloc _merchantBloc = MerchantBloc();
+
+
 
   @override
   Widget build(BuildContext context) {

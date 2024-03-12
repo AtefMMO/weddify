@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weddify/login/user_data.dart';
-import 'package:weddify/merchant_screens/merchant_bloc.dart';
+
 import 'package:weddify/merchant_screens/user_image_picker.dart';
 import 'package:weddify/models/item_model.dart';
 
@@ -17,7 +17,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   UserData? _userData;
   late ItemModel _itemModel;
 
-  final MerchantBloc _merchantBloc = MerchantBloc();
+
   @override
   void initState() {
     super.initState();
@@ -78,7 +78,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
             print('${_itemModel.description}');
             print('${_itemModel.title}');
             print('${_itemModel.price}');
-           _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel , id: _userData!.id));
+
           }
         },
         child: const Text(
