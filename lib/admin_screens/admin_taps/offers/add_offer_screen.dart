@@ -119,7 +119,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
         print('Error adding offer: $e');
         // Handle error adding offer to Firebase
         Fluttertoast.showToast(
-          msg: "Failed to add offer. Please try again.",
+          msg: "Failed to add offer Please try again.",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,

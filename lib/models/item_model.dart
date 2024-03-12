@@ -1,30 +1,30 @@
-class ItemModel {
-  static const String collectionName = 'user';
+class ItemData {
+  static const String collectionName = 'Items';
   String? title;
   String? description;
   String? price;
+  String? id;
   // File? selectedImage;
 
-  ItemModel({
-    this.title,
-    this.description,
-    this.price,
-    // this.selectedImage,
-  });
+  ItemData({this.title, this.description, this.price, this.id
+
+      // this.selectedImage,
+      });
 
   Map<String, dynamic> toFireStore() {
     return {
       'title': title,
       'description': description,
       'price': price,
+      'id': id
       // 'selectedImage': selectedImage,
     };
   }
 
-  ItemModel.fromJson(Map<String, dynamic> itemModel) {
+  ItemData.fromJson(Map<String, dynamic> itemModel) {
     title = itemModel['title'];
     description = itemModel['description'];
     price = itemModel['price'];
-    // title = itemModel['title'];
+    id = itemModel['id'];
   }
 }

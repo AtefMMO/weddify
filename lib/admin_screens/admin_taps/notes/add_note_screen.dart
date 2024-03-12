@@ -120,7 +120,7 @@ class _AddOfferScreenState extends State<AddNoteScreen> {
         print('Error adding Note: $e');
         // Handle error adding note to Firebase
         Fluttertoast.showToast(
-          msg: "Failed to add Note. Please try again.",
+          msg: "Failed to add Note Please try again.",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
