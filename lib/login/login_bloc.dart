@@ -29,6 +29,7 @@ class LoginState with _$LoginState {
   factory LoginState({
     @Default(false) bool isAuthenticating,
     String? errorMessage,
+   @Default('')String id,
     @Default(true) bool hide,
   }) = _LoginState;
 }
@@ -46,8 +47,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       DialogUtils.showLoading(event.context, 'Loading...');
 
       UserData? user = await UserFirebaseUtils.readUserFromDb(credential.user!.uid); // this is the user data mazen from firestore db
-
-
+print(credential.user!.uid);
+      emit(state.copyWith(id: credential.user!.uid));
+print(state.id);
       Fluttertoast.showToast(
           msg: "Sign in Succesful Welcome ${user!.name}",
           toastLength: Toast.LENGTH_SHORT,

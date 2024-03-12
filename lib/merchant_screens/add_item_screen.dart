@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:weddify/login/login_bloc.dart';
 import 'package:weddify/login/user_data.dart';
 import 'package:weddify/merchant_screens/add_item_to_firebase.dart';
+
 
 import 'package:weddify/merchant_screens/user_image_picker.dart';
 import 'package:weddify/models/item_model.dart';
@@ -18,7 +21,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
   UserData? _userData;
   late ItemData _itemData;
-
+LoginBloc loginBloc =LoginBloc();
   @override
   void initState() {
     super.initState();
@@ -27,12 +30,20 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: _buildModalContainer(context),
+    return BlocProvider(
+      create: (BuildContext context)=>loginBloc,
+      child: BlocBuilder<LoginBloc,LoginState>(
+        builder: (BuildContext context, state) {
+          return SingleChildScrollView(
+            child: _buildModalContainer(context,state),
+          );
+        },
+
+      ),
     );
   }
 
-  Container _buildModalContainer(BuildContext context) {
+  Container _buildModalContainer(BuildContext context,LoginState state) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.9,
       padding: const EdgeInsets.all(8),
@@ -65,7 +76,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       ),
                     ),
                     _buildImagePicker(context),
-                    _buildValidationButton()
+                    _buildValidationButton(state)
                   ],
                 ),
               ))
@@ -74,13 +85,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
     );
   }
 
-  Padding _buildValidationButton() {
+  Padding _buildValidationButton(LoginState state) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: ElevatedButton(
         onPressed: () {
-          ///how to get user id
-          addItem('');
+          print(_itemData.title);
+          print(_itemData.description);
+print(_itemData.price);
+print(state.id);
+          addItem(state.id!);
         },
         child: const Text(
           'Add Item',
@@ -174,7 +188,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
           price: _itemData.price);
 
       try {
-        //await FirebaseUtilsMerchant.addItemToFirebase(_itemData,);
+       await FirebaseUtilsMerchant.addItemToFirebase(_itemData,uid);
         print('Item Added Successfully');
         Navigator.pop(context);
         Fluttertoast.showToast(
