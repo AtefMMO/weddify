@@ -8,9 +8,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weddify/admin_screens/admin_main_screen.dart';
 import 'package:weddify/custom_widgets/dialog_utils.dart';
 import 'package:weddify/init_route.dart';
-import 'package:weddify/login/signup_bloc.dart';
 import 'package:weddify/login/user_data.dart';
 import 'package:weddify/merchant_screens/merchant_main_screen.dart';
+
+import '../firebase_utils.dart';
 
 part 'login_bloc.freezed.dart';
 
@@ -43,11 +44,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: event.email, password: event.password);
       DialogUtils.showLoading(event.context, 'Loading...');
-      UserData? user = await UserFirebaseUtils.readUserFromDb(credential
-          .user!.uid); // this is the user data mazen from firestore db
-      print('${user!.email}'); //all working perfectly firebase is done
-      print('${user!.name}');
-      print('${user!.id}');
+
+      UserData? user = await UserFirebaseUtils.readUserFromDb(credential.user!.uid); // this is the user data mazen from firestore db
+
 
       Fluttertoast.showToast(
           msg: "Sign in Succesful Welcome ${user!.name}",
@@ -57,7 +56,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           backgroundColor: Colors.green,
           textColor: Colors.white,
           fontSize: 16.0);
-      if (user.isMerchant) {
+      if (user.isMerchant ?? false) {
         Navigator.pushAndRemoveUntil(
           event.context,
           MaterialPageRoute(builder: (BuildContext context) {

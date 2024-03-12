@@ -22,11 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: taps[selectedIndex],
-        appBar: AppBar(
-            title: Text('Weddify',
-                style: TextStyle(color: Colors.black)),
-            backgroundColor: Colors.pink,
-            centerTitle: true),
+        appBar: AppBar(title: Text('Weddify', style: TextStyle(color: Colors.black)), backgroundColor: Colors.pink, centerTitle: true),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
             selectedIndex = value;
@@ -36,12 +32,9 @@ class _MainScreenState extends State<MainScreen> {
           selectedItemColor: AppTheme.selectedPurble,
           unselectedItemColor: AppTheme.unselectedPurble,
           items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.note_rounded), label: 'Notes'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.video_collection), label: 'Videos'),
+            BottomNavigationBarItem(icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
+            BottomNavigationBarItem(icon: Icon(Icons.note_rounded), label: 'Notes'),
+            BottomNavigationBarItem(icon: Icon(Icons.video_collection), label: 'Videos'),
             BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Buy Now')
           ],
         ),
@@ -50,11 +43,7 @@ class _MainScreenState extends State<MainScreen> {
         ));
   }
 
-
-
   void onDrawerItemClick(int newDrawerItem) {
-
-
     Navigator.pop(context);
     setState(() {});
   }

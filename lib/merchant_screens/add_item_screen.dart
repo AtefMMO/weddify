@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:weddify/login/user_data.dart';
 import 'package:weddify/merchant_screens/merchant_bloc.dart';
 import 'package:weddify/merchant_screens/user_image_picker.dart';
 import 'package:weddify/models/item_model.dart';
@@ -15,12 +14,15 @@ class AddItemScreen extends StatefulWidget {
 class _AddItemScreenState extends State<AddItemScreen> {
   var formKey = GlobalKey<FormState>();
 
-  String itemName = '', description = '', itemPrice = '';
-  File? selectedImage;
-  ItemModel? _itemModel;
+  UserData? _userData;
+  late ItemModel _itemModel;
 
   final MerchantBloc _merchantBloc = MerchantBloc();
-
+  @override
+  void initState() {
+    super.initState();
+    _itemModel = ItemModel(); // Initialize _itemModel in initState
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -73,7 +75,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel()));
+            print('${_itemModel.description}');
+            print('${_itemModel.title}');
+            print('${_itemModel.price}');
+          //  _merchantBloc.add(MerchantEvent.onAddItem(itemModel: _itemModel ?? ItemModel(), id: _userData!.id));
           }
         },
         child: const Text(
@@ -89,7 +94,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       padding: const EdgeInsets.all(8.0),
       child: UserImagePicker(
         onPickImage: (pickedImage) {
-          selectedImage = pickedImage;
+          // _itemModel!.selectedImage = pickedImage;
         },
       ),
     );
@@ -111,7 +116,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
           }
         },
         onChanged: (value) {
-          description = value;
+          _itemModel?.description = value;
         },
       ),
     );
@@ -130,9 +135,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
             return 'Invalid Item price';
           }
         },
-        onChanged: (value) {
-          itemPrice = value;
-        },
+      onChanged: (value) {
+          _itemModel?.price = value;
+          print('${_itemModel.price}');
+        }
       ),
     );
   }
