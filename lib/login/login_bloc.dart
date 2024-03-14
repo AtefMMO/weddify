@@ -17,8 +17,11 @@ part 'login_bloc.freezed.dart';
 
 @freezed
 class LoginEvent with _$LoginEvent {
-  factory LoginEvent.onTappedLogIn({required String email, required String password, required BuildContext context}) =
-      _onTappedSaveLoginEvent;
+  factory LoginEvent.onTappedLogIn({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) = _onTappedSaveLoginEvent;
   factory LoginEvent.onTappedEyeIcon() = _onTappedEyeIconLoginEvent;
 }
 
