@@ -35,6 +35,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
   FutureOr<void> _onSaveItem(_onSaveItemAddItemEvent event, Emitter<AddItemState> emit) async {
     try {
       await FirebaseUtilsMerchant.addItemToFirebase(event.itemModel, event.id);
+
       print('Item Added Successfully');
       Navigator.pop(event.context);
       Fluttertoast.showToast(
@@ -47,7 +48,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
         fontSize: 16.0,
       );
     } catch (e) {
-      print('Error adding Item: $e');
+      print('Error adding Item, $e');
       // Handle error adding note to Firebase
       Fluttertoast.showToast(
         msg: "Failed to add Item Please try again.",

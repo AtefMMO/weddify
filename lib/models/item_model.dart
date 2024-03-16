@@ -1,23 +1,23 @@
+import 'dart:io';
+
 class ItemData {
   static const String collectionName = 'Items';
   String? title;
   String? description;
   String? price;
   String? id;
-  // File? selectedImage;
+  String? imageUrl;
+  File? selectedImage;
 
-  ItemData({this.title, this.description, this.price, this.id
-
-      // this.selectedImage,
-      });
+  ItemData({this.title, this.description, this.price, this.id, this.imageUrl, this.selectedImage});
 
   Map<String, dynamic> toFireStore() {
     return {
       'title': title,
       'description': description,
       'price': price,
-      'id': id
-      // 'selectedImage': selectedImage,
+      'id': id,
+      'imageUrl': imageUrl,
     };
   }
 
@@ -26,5 +26,7 @@ class ItemData {
     description = itemModel['description'];
     price = itemModel['price'];
     id = itemModel['id'];
+    imageUrl = itemModel['imageUrl'];
+    selectedImage = itemModel['selectedImage'];
   }
 }

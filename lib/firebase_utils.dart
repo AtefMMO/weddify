@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:weddify/login/user_data.dart';
 import 'package:weddify/models/item_model.dart';
 
@@ -33,11 +34,17 @@ class FirebaseUtilsMerchant {
         );
   }
 
-  static Future<void> addItemToFirebase(ItemData item, String userId) {
+  static Future<void> addItemToFirebase(ItemData item, String userId) async {
     var collection = getItemCollection(userId);
     var doc = collection.doc();
     item.id = doc.id;
+    final storageRef = FirebaseStorage.instance.ref().child('items_images').child('$userId.jpg'); // create path in firebase
+    if (item.selectedImage != null) {
+      await storageRef.putFile(item.selectedImage!); // send the selected image url to firebase
 
+      final imageUrl = await storageRef.getDownloadURL();
+      item.imageUrl = imageUrl;
+    }
     return doc.set(item);
   }
 

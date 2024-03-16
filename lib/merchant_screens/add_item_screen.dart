@@ -113,7 +113,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: UserImagePicker(
                               onPickImage: (pickedImage) {
-                                // _itemModel!.selectedImage = pickedImage;
+                                _itemData.selectedImage = pickedImage;
                               },
                             ),
                           ),
@@ -131,6 +131,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                       description: _itemData.description,
                                       price: _itemData.price,
                                       title: _itemData.title,
+                                      selectedImage: _itemData.selectedImage!,
                                     ),
                                     context: context,
                                   ),
