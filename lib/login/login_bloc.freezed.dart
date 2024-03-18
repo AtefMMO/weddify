@@ -354,6 +354,7 @@ abstract class _onTappedEyeIconLoginEvent implements LoginEvent {
 mixin _$LoginState {
   bool get isAuthenticating => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   bool get hide => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -367,7 +368,8 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({bool isAuthenticating, String? errorMessage, bool hide});
+  $Res call(
+      {bool isAuthenticating, String? errorMessage, String id, bool hide});
 }
 
 /// @nodoc
@@ -385,6 +387,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   $Res call({
     Object? isAuthenticating = null,
     Object? errorMessage = freezed,
+    Object? id = null,
     Object? hide = null,
   }) {
     return _then(_value.copyWith(
@@ -396,6 +399,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       hide: null == hide
           ? _value.hide
           : hide // ignore: cast_nullable_to_non_nullable
@@ -412,7 +419,8 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isAuthenticating, String? errorMessage, bool hide});
+  $Res call(
+      {bool isAuthenticating, String? errorMessage, String id, bool hide});
 }
 
 /// @nodoc
@@ -428,6 +436,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isAuthenticating = null,
     Object? errorMessage = freezed,
+    Object? id = null,
     Object? hide = null,
   }) {
     return _then(_$LoginStateImpl(
@@ -439,6 +448,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       hide: null == hide
           ? _value.hide
           : hide // ignore: cast_nullable_to_non_nullable
@@ -451,7 +464,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 
 class _$LoginStateImpl implements _LoginState {
   _$LoginStateImpl(
-      {this.isAuthenticating = false, this.errorMessage, this.hide = true});
+      {this.isAuthenticating = false,
+      this.errorMessage,
+      this.id = '',
+      this.hide = true});
 
   @override
   @JsonKey()
@@ -460,11 +476,14 @@ class _$LoginStateImpl implements _LoginState {
   final String? errorMessage;
   @override
   @JsonKey()
+  final String id;
+  @override
+  @JsonKey()
   final bool hide;
 
   @override
   String toString() {
-    return 'LoginState(isAuthenticating: $isAuthenticating, errorMessage: $errorMessage, hide: $hide)';
+    return 'LoginState(isAuthenticating: $isAuthenticating, errorMessage: $errorMessage, id: $id, hide: $hide)';
   }
 
   @override
@@ -476,12 +495,13 @@ class _$LoginStateImpl implements _LoginState {
                 other.isAuthenticating == isAuthenticating) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.hide, hide) || other.hide == hide));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, isAuthenticating, errorMessage, hide);
+      Object.hash(runtimeType, isAuthenticating, errorMessage, id, hide);
 
   @JsonKey(ignore: true)
   @override
@@ -494,12 +514,15 @@ abstract class _LoginState implements LoginState {
   factory _LoginState(
       {final bool isAuthenticating,
       final String? errorMessage,
+      final String id,
       final bool hide}) = _$LoginStateImpl;
 
   @override
   bool get isAuthenticating;
   @override
   String? get errorMessage;
+  @override
+  String get id;
   @override
   bool get hide;
   @override

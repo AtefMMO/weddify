@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:weddify/login/user_data.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weddify/merchant_screens/add_item_bloc.dart';
 import 'package:weddify/merchant_screens/user_image_picker.dart';
 import 'package:weddify/models/item_model.dart';
 
 class AddItemScreen extends StatefulWidget {
-  const AddItemScreen({super.key});
+  const AddItemScreen({super.key, required this.id});
+  final String id;
 
   @override
   State<AddItemScreen> createState() => _AddItemScreenState();
@@ -14,152 +15,154 @@ class AddItemScreen extends StatefulWidget {
 class _AddItemScreenState extends State<AddItemScreen> {
   var formKey = GlobalKey<FormState>();
 
-  UserData? _userData;
-  late ItemModel _itemModel;
-
+  late ItemData _itemData;
+  final AddItemBloc _addItemBloc = AddItemBloc();
 
   @override
   void initState() {
     super.initState();
-    _itemModel = ItemModel(); // Initialize _itemModel in initState
+    _itemData = ItemData(); // Initialize _itemModel in initState
   }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: _buildModalContainer(context),
-    );
-  }
-
-  Container _buildModalContainer(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.9,
-      padding: const EdgeInsets.all(8),
-      color: Theme.of(context).cardColor,
-      child: Column(
-        children: [
-          Text(
-            'Add new Item',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          Padding(
-              padding: const EdgeInsets.all(25),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    _buildTitleField(context),
-                    _buildPriceField(context),
-                    const SizedBox(height: 15),
-                    _buildDescriptionField(context),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        'Select Item Image',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black),
-                        textAlign: TextAlign.center,
+    return BlocProvider(
+      create: (context) => _addItemBloc,
+      child: BlocBuilder<AddItemBloc, AddItemState>(
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.9,
+              padding: const EdgeInsets.all(8),
+              color: Theme.of(context).cardColor,
+              child: Column(
+                children: [
+                  Text(
+                    'Add new Item',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  hintText: 'Enter Item title',
+                                  hintStyle: Theme.of(context).textTheme.titleSmall,
+                                  enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Invalid Item Name';
+                                }
+                              },
+                              onChanged: (value) {
+                                _itemData.title = value;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: 'Enter Item price',
+                                    hintStyle: Theme.of(context).textTheme.titleSmall,
+                                    enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Invalid Item price';
+                                  }
+                                },
+                                onChanged: (value) {
+                                  _itemData.price = value;
+                                  print('${_itemData.price}');
+                                }),
+                          ),
+                          const SizedBox(height: 15),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'Enter Item description',
+                                hintStyle: Theme.of(context).textTheme.titleSmall,
+                                enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
+                              ),
+                              maxLines: 3,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Invalid Item description';
+                                }
+                              },
+                              onChanged: (value) {
+                                _itemData.description = value;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              'Select Item Image',
+                              style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: UserImagePicker(
+                              onPickImage: (pickedImage) {
+                                _itemData.selectedImage = pickedImage;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                print(_itemData.title);
+                                print(_itemData.description);
+                                print(_itemData.price);
+                                _addItemBloc.add(
+                                  AddItemEvent.onSaveItem(
+                                    id: widget.id,
+                                    itemModel: ItemData(
+                                      description: _itemData.description,
+                                      price: _itemData.price,
+                                      title: _itemData.title,
+                                      selectedImage: _itemData.selectedImage!,
+                                    ),
+                                    context: context,
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Add Item',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    _buildImagePicker(context),
-                    _buildValidationButton()
-                  ],
-                ),
-              ))
-        ],
-      ),
-    );
-  }
-
-  Padding _buildValidationButton() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: ElevatedButton(
-        onPressed: () {
-          if (formKey.currentState!.validate()) {
-            print('${_itemModel.description}');
-            print('${_itemModel.title}');
-            print('${_itemModel.price}');
-
-          }
-        },
-        child: const Text(
-          'Add Item',
-          style: TextStyle(fontSize: 18),
-        ),
-      ),
-    );
-  }
-
-  Padding _buildImagePicker(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: UserImagePicker(
-        onPickImage: (pickedImage) {
-          // _itemModel!.selectedImage = pickedImage;
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
     );
   }
 
-  Padding _buildDescriptionField(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          hintText: 'Enter Item description',
-          hintStyle: Theme.of(context).textTheme.titleSmall,
-          enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
-        ),
-        maxLines: 3,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Invalid Item description';
-          }
-        },
-        onChanged: (value) {
-          _itemModel?.description = value;
-        },
-      ),
-    );
-  }
-
-  Padding _buildPriceField(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-            hintText: 'Enter Item price',
-            hintStyle: Theme.of(context).textTheme.titleSmall,
-            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Invalid Item price';
-          }
-        },
-      onChanged: (value) {
-          _itemModel?.price = value;
-          print('${_itemModel.price}');
-        }
-      ),
-    );
-  }
-
-  Padding _buildTitleField(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-            hintText: 'Enter Item title',
-            hintStyle: Theme.of(context).textTheme.titleSmall,
-            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Invalid Item Name';
-          }
-        },
-        onChanged: (value) {
-          _itemModel?.title = value;
-        },
-      ),
-    );
+  void addItem(String uid) async {
+    if (formKey.currentState!.validate()) {
+      ItemData note = ItemData(
+        title: _itemData.title,
+        description: _itemData.description,
+        price: _itemData.price,
+      );
+    }
   }
 }

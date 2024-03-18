@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/market_screen/market_tap.dart';
+import 'package:weddify/notes_screen/notes_cubit.dart';
 import 'package:weddify/notes_screen/notes_tap.dart';
 import 'package:weddify/offers_screen/offers_tap.dart';
 import 'package:weddify/videos_screen/videos_tap.dart';
@@ -19,7 +21,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider(
+  create: (context) => NotesCubit(),
+  child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: taps[selectedIndex],
         appBar: AppBar(title: Text('Weddify', style: TextStyle(color: Colors.black)), backgroundColor: Colors.pink, centerTitle: true),
@@ -40,7 +44,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
         drawer: Drawer(
           child: HomeDrawer(onDrawerItemClick: onDrawerItemClick),
-        ));
+        )),
+);
   }
 
   void onDrawerItemClick(int newDrawerItem) {

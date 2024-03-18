@@ -50,6 +50,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_bloc: ^8.1.4
   image_picker: ^1.0.7
+  firebase_storage: ^11.6.9
 
 
 dev_dependencies:

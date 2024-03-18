@@ -1,30 +1,32 @@
-class ItemModel {
-  static const String collectionName = 'user';
+import 'dart:io';
+
+class ItemData {
+  static const String collectionName = 'Items';
   String? title;
   String? description;
   String? price;
-  // File? selectedImage;
+  String? id;
+  String? imageUrl;
+  File? selectedImage;
 
-  ItemModel({
-    this.title,
-    this.description,
-    this.price,
-    // this.selectedImage,
-  });
+  ItemData({this.title, this.description, this.price, this.id, this.imageUrl, this.selectedImage});
 
   Map<String, dynamic> toFireStore() {
     return {
       'title': title,
       'description': description,
       'price': price,
-      // 'selectedImage': selectedImage,
+      'id': id,
+      'imageUrl': imageUrl,
     };
   }
 
-  ItemModel.fromJson(Map<String, dynamic> itemModel) {
+  ItemData.fromJson(Map<String, dynamic> itemModel) {
     title = itemModel['title'];
     description = itemModel['description'];
     price = itemModel['price'];
-    // title = itemModel['title'];
+    id = itemModel['id'];
+    imageUrl = itemModel['imageUrl'];
+    selectedImage = itemModel['selectedImage'];
   }
 }
