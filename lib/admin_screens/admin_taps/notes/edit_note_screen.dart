@@ -103,7 +103,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   }
 
   editNote(BuildContext context) {
-    FirebaseUtils.updateData(widget.note);
+    AdminFirebaseUtils.updateData(widget.note);
     Navigator.pop(context);
 
     Fluttertoast.showToast(

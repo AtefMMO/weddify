@@ -104,7 +104,7 @@ class _AddOfferScreenState extends State<AddNoteScreen> {
       );
 
       try {
-        await FirebaseUtils.addNoteToFirebase(note);
+        await AdminFirebaseUtils.addNoteToFirebase(note);
         print('Note Added Successfully');
         Navigator.pop(context);
         Fluttertoast.showToast(

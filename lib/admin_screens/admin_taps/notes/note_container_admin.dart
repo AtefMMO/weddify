@@ -100,6 +100,6 @@ class noteContainerAdmin extends StatelessWidget {
         context: context, builder: (context) => EditNoteScreen(note: note));
   }
   deleteNote(NoteData note){
-    FirebaseUtils.deleteData(note);
+    AdminFirebaseUtils.deleteData(note);
   }
 }
