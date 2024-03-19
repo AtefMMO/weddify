@@ -33,8 +33,7 @@ class Notes extends StatelessWidget {
                 ),
                 BlocBuilder<NotesCubit, NotesState>(
                   builder: (context, state) {
-                    if (state.note != null && state.note.isNotEmpty) {
-
+                    if (state.note.isNotEmpty) {
                       return Expanded(
                         child: ListView.builder(
                           itemCount: state.note.length,
@@ -49,7 +48,6 @@ class Notes extends StatelessWidget {
                     }
                   },
                 )
-
               ],
             ),
           ),

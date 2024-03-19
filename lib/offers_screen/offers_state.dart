@@ -1,6 +1,9 @@
 part of 'offers_cubit.dart';
 
-@immutable
-abstract class OffersState {}
 
-class OffersInitial extends OffersState {}
+ class OffersState {
+   List<OfferData> offer=[];
+   OffersState({required this.offer});
+ }
+
+

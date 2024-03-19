@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'offer_model.dart';
 
-class FirebaseUtils {
+class FirebaseUtilsOffer {
   static CollectionReference<OfferData> getOfferCollection() {
     // Return the collection reference to the "offers" collection
     return FirebaseFirestore.instance

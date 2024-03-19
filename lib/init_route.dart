@@ -4,6 +4,7 @@ import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/market_screen/market_tap.dart';
 import 'package:weddify/notes_screen/notes_cubit.dart';
 import 'package:weddify/notes_screen/notes_tap.dart';
+import 'package:weddify/offers_screen/offers_cubit.dart';
 import 'package:weddify/offers_screen/offers_tap.dart';
 import 'package:weddify/videos_screen/videos_tap.dart';
 
@@ -21,8 +22,15 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return MultiBlocProvider(
+  providers: [
+    BlocProvider(
   create: (context) => NotesCubit(),
+),
+    BlocProvider(
+      create: (context) => OffersCubit(),
+    ),
+  ],
   child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: taps[selectedIndex],
