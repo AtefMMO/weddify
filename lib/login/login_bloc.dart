@@ -80,7 +80,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         Navigator.pushAndRemoveUntil(
           event.context,
           MaterialPageRoute(builder: (BuildContext context) {
-            return MainScreen();
+            return MainScreen(
+              username: user?.name ?? '',
+            );
           }),
           (route) => false,
         );

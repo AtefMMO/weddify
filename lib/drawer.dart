@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
-  Function onDrawerItemClick;
-  HomeDrawer({required this.onDrawerItemClick});
+  final Function onDrawerItemClick;
+  final String username;
+  const HomeDrawer({super.key, required this.onDrawerItemClick, required this.username});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,16 +18,16 @@ class HomeDrawer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 70),
                 child: Text(
-                  'UserName',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  username,
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
               ),
             )
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
@@ -42,8 +42,8 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
@@ -58,8 +58,8 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
@@ -74,8 +74,8 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
@@ -90,12 +90,14 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ),
-
         Padding(
-            padding:EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: ElevatedButton(
               onPressed: () {},
-              child: Text('\t \tlog out\t \t',style: TextStyle(color: Colors.white),),
+              child: const Text(
+                '\t \tlog out\t \t',
+                style: TextStyle(color: Colors.white),
+              ),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.pink),
             )),
       ],

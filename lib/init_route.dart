@@ -9,7 +9,9 @@ import 'drawer.dart';
 
 class MainScreen extends StatefulWidget {
   static const String routeName = 'MainScreen';
+  final String username;
 
+  const MainScreen({super.key, required this.username});
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -22,7 +24,11 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: taps[selectedIndex],
-        appBar: AppBar(title: Text('Weddify', style: TextStyle(color: Colors.black)), backgroundColor: Colors.pink, centerTitle: true),
+        appBar: AppBar(
+          title: Text('Weddify', style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.pink,
+          centerTitle: true,
+        ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
             selectedIndex = value;
@@ -39,7 +45,10 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
         drawer: Drawer(
-          child: HomeDrawer(onDrawerItemClick: onDrawerItemClick),
+          child: HomeDrawer(
+            onDrawerItemClick: onDrawerItemClick,
+            username: widget.username,
+          ),
         ));
   }
 
