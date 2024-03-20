@@ -60,7 +60,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       Navigator.pushAndRemoveUntil(
         event.context,
         MaterialPageRoute(builder: (BuildContext context) {
-          return MainScreen(username: user?.name ?? '');
+          return MainScreen(user: user!);
         }),
         (route) => false,
       );

@@ -81,7 +81,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           event.context,
           MaterialPageRoute(builder: (BuildContext context) {
             return MainScreen(
-              username: user?.name ?? '',
+              user: user!,
             );
           }),
           (route) => false,

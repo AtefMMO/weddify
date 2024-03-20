@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:weddify/app_theme/app_theme.dart';
+import 'package:weddify/login/user_data.dart';
 import 'package:weddify/market_screen/market_tap.dart';
 import 'package:weddify/notes_screen/notes_tap.dart';
 import 'package:weddify/offers_screen/offers_tap.dart';
 import 'package:weddify/videos_screen/videos_tap.dart';
 
-import 'drawer.dart';
+import 'drawer_screens/drawer.dart';
 
 class MainScreen extends StatefulWidget {
   static const String routeName = 'MainScreen';
-  final String username;
+  final UserData user;
 
-  const MainScreen({super.key, required this.username});
+  const MainScreen({super.key, required this.user});
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -47,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
         drawer: Drawer(
           child: HomeDrawer(
             onDrawerItemClick: onDrawerItemClick,
-            username: widget.username,
+            user: widget.user,
           ),
         ));
   }
