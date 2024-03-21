@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:weddify/admin_screens/admin_taps/notes/note_model.dart';
 
 class Note extends StatelessWidget {
-  String? content;
+ NoteData ?note;
 
-
+Note({required this.note});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,7 +14,12 @@ class Note extends StatelessWidget {
             borderRadius: BorderRadius.circular(20), color: Colors.white),
         height: MediaQuery.of(context).size.height * 0.2,
         width: MediaQuery.of(context).size.width * 0.85,
-        child: Center(child: Text(content??'Note')),
+        child: Column(
+          children: [
+            Center(child: Text(note!.title??'Note')),
+            Center(child: Text(note!.description??'Description'))
+          ],
+        ),
       ),
     );
   }

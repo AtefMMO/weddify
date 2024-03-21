@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
+import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
 
-class EditItemScreen extends StatefulWidget {
-  @override
-  State<EditItemScreen> createState() => _EditItemScreenState();
-}
-
-class _EditItemScreenState extends State<EditItemScreen> {
+class EditOfferScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
 
-  String itemName = 'Item', itemPrice = '111', itemDescription = 'My New Item';
+late OfferData offer;
+
+
+
+
+
+EditOfferScreen({required this.offer});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
         child: Column(
           children: [
             Text(
-              'Edit Item',
+              'Edit Offer',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Padding(
@@ -32,93 +36,57 @@ class _EditItemScreenState extends State<EditItemScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: itemName,
+                          initialValue: offer.title,
                           decoration: InputDecoration(
-                              hintText: 'Enter Item title',
+                              hintText: 'Enter Offer title',
                               hintStyle: Theme.of(context).textTheme.titleSmall,
                               enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Invalid Item Name';
+                              return 'Invalid Offer title';
                             }
                           },
                           onChanged: (value) {
-                            itemName = value;
+                            offer.title = value;
                           },
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          initialValue: itemPrice,
-                          decoration: InputDecoration(
-                              hintText: 'Enter Item price',
-                              hintStyle: Theme.of(context).textTheme.titleSmall,
-                              enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Invalid Item price';
-                            }
-                          },
-                          onChanged: (value) {
-                            itemPrice = value;
-                          },
-                        ),
-                      ),
+
                       const SizedBox(
                         height: 15,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
-                          initialValue: itemDescription,
+                          initialValue: offer.description,
                           decoration: InputDecoration(
-                            hintText: 'Enter Item description',
+                            hintText: 'Enter Offer description',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
                             enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
                           ),
                           maxLines: 3,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Invalid Item description';
+                              return 'Invalid Offer description';
                             }
                           },
                           onChanged: (value) {
-                            itemDescription = value;
+                            offer.description = value;
                           },
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: Text(
-                          'Select Item Image',
-                          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          color: Colors.grey,
-                          child: const Center(
-                              child: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          )),
-                        ),
-                      ),
+
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                //add item to db
+                               editOffer(context);
                               }
                             },
                             child: const Text(
-                              'Edit Item',
+                              'Edit Offer',
                               style: TextStyle(fontSize: 18),
                             )),
                       )
@@ -129,5 +97,21 @@ class _EditItemScreenState extends State<EditItemScreen> {
         ),
       ),
     );
+  }
+
+  editOffer(BuildContext context){
+
+    FirebaseUtilsOffer.updateData(offer
+       );
+    Navigator.pop(context);
+
+    Fluttertoast.showToast(
+        msg: "Task Edited Successfully",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }
