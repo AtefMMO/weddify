@@ -2,7 +2,7 @@ class UserData {
   static const String collectionName = 'user';
   String? name;
   String? email;
-  String ?id ;
+  String? id;
   bool? isAdmin = false;
   bool? isMerchant = false;
   UserData({
