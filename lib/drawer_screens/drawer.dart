@@ -1,9 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weddify/drawer_screens/my_profile_screen.dart';
+import 'package:weddify/login/user_data.dart';
 
 class HomeDrawer extends StatelessWidget {
-  Function onDrawerItemClick;
-  HomeDrawer({required this.onDrawerItemClick});
+  final Function onDrawerItemClick;
+  final UserData user;
+
+  const HomeDrawer({super.key, required this.onDrawerItemClick, required this.user});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,32 +22,40 @@ class HomeDrawer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 70),
                 child: Text(
-                  'UserName',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  'Hello! ${user.name}',
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
               ),
             )
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Icon(
-                Icons.person,
-                color: Colors.black,
-                size: 35,
-              ),
-              Text(
-                '  My Profile',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              )
-            ],
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MyProfileScreen(
+                      user: user,
+                    )));
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.person,
+                  color: Colors.black,
+                  size: 35,
+                ),
+                Text(
+                  '  My Profile',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                )
+              ],
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
@@ -58,8 +70,8 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
@@ -74,8 +86,8 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
@@ -90,12 +102,14 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ),
-
         Padding(
-            padding:EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: ElevatedButton(
               onPressed: () {},
-              child: Text('\t \tlog out\t \t',style: TextStyle(color: Colors.white),),
+              child: const Text(
+                '\t \tlog out\t \t',
+                style: TextStyle(color: Colors.white),
+              ),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.pink),
             )),
       ],

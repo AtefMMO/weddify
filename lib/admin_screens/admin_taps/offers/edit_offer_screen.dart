@@ -101,7 +101,7 @@ EditOfferScreen({required this.offer});
 
   editOffer(BuildContext context){
 
-    FirebaseUtils.updateData(offer
+    FirebaseUtilsOffer.updateData(offer
        );
     Navigator.pop(context);
 

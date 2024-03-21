@@ -28,7 +28,7 @@ class _OffersAdminState extends State<OffersAdmin> {
     });
 
     // Retrieve offers asynchronously and assign them to the offers variable
-    offers = await FirebaseUtils.getOfferFromFireBase();
+    offers = await FirebaseUtilsOffer.getOfferFromFireBase();
 
     // Set isLoading to false when loading finishes
     setState(() {

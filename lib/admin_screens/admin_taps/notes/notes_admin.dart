@@ -29,7 +29,7 @@ class _NotesAdminState extends State<NotesAdmin> {
     });
 
     // Retrieve offers asynchronously and assign them to the ntoes variable
-    notes = await AdminFirebaseUtils.getNoteFromFireBase();
+    notes = await FirebaseUtilsNote.getNoteFromFireBase();
 
     // Set isLoading to false when loading finishes
     setState(() {

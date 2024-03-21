@@ -103,7 +103,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
       );
 
       try {
-        await FirebaseUtils.addOfferToFirebase(offer);
+        await FirebaseUtilsOffer.addOfferToFirebase(offer);
         print('Offer Added Successfully');
         Navigator.pop(context);
         Fluttertoast.showToast(

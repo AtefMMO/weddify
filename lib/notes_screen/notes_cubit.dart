@@ -9,12 +9,10 @@ class NotesCubit extends Cubit<NotesState> {
   NotesCubit() : super(NotesState(note: []));
   getNotesList() async {
     try {
-      List<NoteData> noteList = await AdminFirebaseUtils.getNoteFromFireBase();
+      List<NoteData> noteList = await FirebaseUtilsNote.getNoteFromFireBase();
       emit(NotesState(note: noteList));
     } catch (e) {
-
       print('Error fetching notes: $e');
     }
   }
-
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -48,6 +47,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       await UserFirebaseUtils.addUserToDb(
           UserData(email: event.email, name: event.fullName, id: credential.user!.uid, isAdmin: false, isMerchant: false));
 
+      UserData? user = await UserFirebaseUtils.readUserFromDb(credential.user!.uid);
+
       Fluttertoast.showToast(
           msg: "Account Created Succesfuly Welcome ${event.fullName}",
           toastLength: Toast.LENGTH_SHORT,
@@ -59,7 +60,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       Navigator.pushAndRemoveUntil(
         event.context,
         MaterialPageRoute(builder: (BuildContext context) {
-          return MainScreen();
+          return MainScreen(user: user!);
         }),
         (route) => false,
       );

@@ -3,7 +3,7 @@ import 'package:weddify/admin_screens/admin_taps/notes/note_model.dart';
 
 
 
-class AdminFirebaseUtils {
+class FirebaseUtilsNote {
   static CollectionReference<NoteData> getNoteCollection() {
     // Return the collection reference to the "notes" collection
     return FirebaseFirestore.instance
