@@ -99,6 +99,6 @@ late OfferData offer;
         context: context, builder: (context) => EditOfferScreen(offer: offer));
   }
   deleteOffer(OfferData offer){
-    FirebaseUtils.deleteData(offer);
+    FirebaseUtilsOffer.deleteData(offer);
   }
 }
