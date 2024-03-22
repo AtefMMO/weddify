@@ -23,15 +23,15 @@ class _NotesAdminState extends State<NotesAdmin> {
     loadNotes();
   }
   void loadNotes() async {
-    // Set isLoading to true when loading starts
+
     setState(() {
       isLoading = true;
     });
 
-    // Retrieve offers asynchronously and assign them to the ntoes variable
+
     notes = await FirebaseUtilsNote.getNoteFromFireBase();
 
-    // Set isLoading to false when loading finishes
+
     setState(() {
       isLoading = false;
     });

@@ -10,6 +10,7 @@ import 'package:weddify/offers_screen/offers_tap.dart';
 import 'package:weddify/videos_screen/videos_tap.dart';
 
 import 'drawer_screens/drawer.dart';
+import 'videos_screen/video_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   static const String routeName = 'MainScreen';
@@ -26,45 +27,50 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-  providers: [
-    BlocProvider(
-  create: (context) => NotesCubit(),
-),
-    BlocProvider(
-      create: (context) => OffersCubit(),
-    ),
-  ],
-  child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: taps[selectedIndex],
-        appBar: AppBar(
-          title: Text('Weddify', style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.pink,
-          centerTitle: true,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (value) {
-            selectedIndex = value;
-            setState(() {});
-          },
-          currentIndex: selectedIndex,
-          selectedItemColor: AppTheme.selectedPurble,
-          unselectedItemColor: AppTheme.unselectedPurble,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
-            BottomNavigationBarItem(icon: Icon(Icons.note_rounded), label: 'Notes'),
-            BottomNavigationBarItem(icon: Icon(Icons.video_collection), label: 'Videos'),
-            BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Buy Now')
-          ],
-        ),
-        drawer: Drawer(
-
-          child: HomeDrawer(
-            onDrawerItemClick: onDrawerItemClick,
-            user: widget.user,
+        providers: [
+          BlocProvider(
+            create: (context) => NotesCubit(),
           ),
-        ));
-
+          BlocProvider(
+            create: (context) => OffersCubit(),
+          ),
+          BlocProvider(
+            create: (context) => VideoCubit(),
+          )
+        ],
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: taps[selectedIndex],
+            appBar: AppBar(
+              title: Text('Weddify', style: TextStyle(color: Colors.black)),
+              backgroundColor: Colors.pink,
+              centerTitle: true,
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: (value) {
+                selectedIndex = value;
+                setState(() {});
+              },
+              currentIndex: selectedIndex,
+              selectedItemColor: AppTheme.selectedPurble,
+              unselectedItemColor: AppTheme.unselectedPurble,
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.note_rounded), label: 'Notes'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.video_collection), label: 'Videos'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.shop), label: 'Buy Now')
+              ],
+            ),
+            drawer: Drawer(
+              child: HomeDrawer(
+                onDrawerItemClick: onDrawerItemClick,
+                user: widget.user,
+              ),
+            )));
   }
 
   void onDrawerItemClick(int newDrawerItem) {

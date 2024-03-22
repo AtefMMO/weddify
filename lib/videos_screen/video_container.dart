@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weddify/admin_screens/admin_taps/videos/video_model.dart';
 import 'package:weddify/videos_screen/video_player.dart';
 
 class Video extends StatelessWidget {
-  String? videoImage;
-  Video([this.videoImage]);
+  VideoData video;
+
+  Video({required this.video});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,27 +18,34 @@ class Video extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.2,
         width: MediaQuery.of(context).size.width * 0.85,
         child: Center(
-            child: InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, VideoPlayerScreen.routeName);
-          },
-          child: Stack(
-            children: [
-              Image.asset(
-                '$videoImage',
-                fit: BoxFit.fill,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-              Center(
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VideoPlayerScreen(video!),
+                ),
+              );
+            },
+            child: Stack(
+              children: [
+                Image.network(
+                  video.imageUrl!,
+                  fit: BoxFit.fill,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+                Center(
                   child: Icon(
-                Icons.play_circle,
-                size: 50,
-                color: Colors.white,
-              ))
-            ],
+                    Icons.play_circle,
+                    size: 50,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }

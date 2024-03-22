@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         MainScreen.routeName: (context) => MainScreen(user: ModalRoute.of(context)!.settings.arguments as UserData),
         LogInScreen.routeName: (context) => LogInScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
-        VideoPlayerScreen.routeName: (context) => VideoPlayerScreen(),
+        VideoPlayerScreen.routeName: (context) => VideoPlayerScreen( ),
         MerchantMainScreen.routeName: (context) => MerchantMainScreen(id: ModalRoute.of(context)!.settings.arguments as String),
         MainScreenAdmin.routeName: (context) => MainScreenAdmin()
       },
