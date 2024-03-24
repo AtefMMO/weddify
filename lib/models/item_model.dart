@@ -8,7 +8,7 @@ class ItemData {
   String? id;
   String? imageUrl;
   File? selectedImage;
-
+  List <String> categories=['اجهزة منزلية','ادوات منزلية','أثاث','مفروشات','قاعات','شركات ليموزين','مطابخ','ادوات كهربائية','ادوات صحية','ديكورات'];
   ItemData({this.title, this.description, this.price, this.id, this.imageUrl, this.selectedImage});
 
   Map<String, dynamic> toFireStore() {

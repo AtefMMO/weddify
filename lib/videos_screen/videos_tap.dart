@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weddify/videos_screen/video_cubit.dart';
 
-
 import 'video_container.dart';
 
 class Videos extends StatelessWidget {
@@ -19,10 +18,7 @@ class Videos extends StatelessWidget {
         ),
         Padding(
           padding:
-          EdgeInsets.only(top: MediaQuery
-              .of(context)
-              .size
-              .height * 0.05),
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,18 +36,20 @@ class Videos extends StatelessWidget {
                 ),
                 BlocBuilder<VideoCubit, VideoState>(
                   builder: (context, state) {
-                    if(state.videos.isNotEmpty){
+                    if (state.videos.isNotEmpty) {
                       return Expanded(
-                        child: ListView.builder(itemBuilder: (context, index) {
-                          print(state.videos.length);
-                          return Video(video:  state.videos[index]);
-                        }, itemCount:state.videos.length,),
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            print(state.videos.length);
+                            return Video(video: state.videos[index]);
+                          },
+                          itemCount: state.videos.length,
+                        ),
                       );
-                    }else{
+                    } else {
                       BlocProvider.of<VideoCubit>(context).getVideosList();
                       return Center(child: CircularProgressIndicator());
                     }
-
                   },
                 )
               ],

@@ -52,8 +52,11 @@ class _AddItemScreenState extends State<AddItemScreen> {
                             child: TextFormField(
                               decoration: InputDecoration(
                                   hintText: 'Enter Item title',
-                                  hintStyle: Theme.of(context).textTheme.titleSmall,
-                                  enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                                  hintStyle:
+                                      Theme.of(context).textTheme.titleSmall,
+                                  enabledBorder: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.black))),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Invalid Item Name';
@@ -69,8 +72,11 @@ class _AddItemScreenState extends State<AddItemScreen> {
                             child: TextFormField(
                                 decoration: InputDecoration(
                                     hintText: 'Enter Item price',
-                                    hintStyle: Theme.of(context).textTheme.titleSmall,
-                                    enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                                    hintStyle:
+                                        Theme.of(context).textTheme.titleSmall,
+                                    enabledBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1, color: Colors.black))),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Invalid Item price';
@@ -87,8 +93,11 @@ class _AddItemScreenState extends State<AddItemScreen> {
                             child: TextFormField(
                               decoration: InputDecoration(
                                 hintText: 'Enter Item description',
-                                hintStyle: Theme.of(context).textTheme.titleSmall,
-                                enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
+                                hintStyle:
+                                    Theme.of(context).textTheme.titleSmall,
+                                enabledBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Colors.black)),
                               ),
                               maxLines: 3,
                               validator: (value) {
@@ -105,7 +114,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
                             padding: const EdgeInsets.only(top: 15),
                             child: Text(
                               'Select Item Image',
-                              style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(color: Colors.black),
                               textAlign: TextAlign.center,
                             ),
                           ),
