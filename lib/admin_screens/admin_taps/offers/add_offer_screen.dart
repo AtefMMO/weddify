@@ -42,7 +42,9 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                         decoration: InputDecoration(
                             hintText: 'Enter Offer title',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
-                            enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black))),
+                            enabledBorder: const UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.black))),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Invalid Offer Name';
@@ -62,7 +64,9 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                         decoration: InputDecoration(
                           hintText: 'Enter Offer description',
                           hintStyle: Theme.of(context).textTheme.titleSmall,
-                          enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.black)),
+                          enabledBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 1, color: Colors.black)),
                         ),
                         maxLines: 3,
                         validator: (value) {

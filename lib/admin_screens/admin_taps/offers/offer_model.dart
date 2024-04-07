@@ -13,8 +13,7 @@ class OfferData {
     this.id = '',
     required this.title,
     required this.description,
-    this.offerImg,
-    this.imgLink,
+    required this.offerImg,
   });
   Map<String, dynamic> toJson() {
     //convert class data to json so we can save it on firebase
@@ -26,11 +25,11 @@ class OfferData {
     };
   }
 
-  OfferData.fromJson(Map<String, dynamic> taskData) {
-    id = taskData['id'] as String?;
-    title = taskData['title'];
-    description = taskData['description'];
-    offerImg = taskData['offerImg'];
-    imgLink = taskData['imgLink'];
+  OfferData.fromJson(Map<String, dynamic> offerData) {
+    id = offerData['id'] as String?;
+    title = offerData['title'];
+    description = offerData['description'];
+    offerImg = offerData['offerImg'];
+    imgLink = offerData['imgLink'];
   }
 }

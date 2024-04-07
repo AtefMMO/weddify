@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weddify/app_theme/app_theme.dart';
@@ -24,7 +26,15 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     UserFirebaseUtils.readUserFromDb();
-    print(UserFirebaseUtils.isReady);
+    _startDelayedAction();
+  }
+
+  void _startDelayedAction() {
+    Timer(Duration(seconds: 6), () {
+      setState(() {
+        UserFirebaseUtils.isReady = true;
+      });
+    });
   }
 
   int selectedIndex = 0;
@@ -79,17 +89,9 @@ class _MainScreenState extends State<MainScreen> {
                 ))
             : Scaffold(
                 backgroundColor: const Color(0xff474646),
-                body: InkWell(
-                  onTap: () async{
-                    await Future.delayed(Duration(seconds: 6));
-                    setState(() {
-                      UserFirebaseUtils.isReady = true;
-                    });
-                  },
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.pink,
-                    ),
+                body: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.pink,
                   ),
                 )));
   }
