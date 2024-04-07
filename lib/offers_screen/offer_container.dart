@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
 
 class Offer extends StatelessWidget {
- OfferData offer;
-Offer({required this.offer});
+  OfferData offer;
+  Offer({required this.offer});
   @override
   Widget build(BuildContext context) {
     return Padding(
