@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:weddify/market_screen/merchant_container.dart';
 
 class Market extends StatelessWidget {
+  List <String> categories=['اجهزة منزلية','ادوات منزلية','أثاث','مفروشات','قاعات','شركات ليموزين','مطابخ','ادوات كهربائية','ادوات صحية','ديكورات'];
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,22 +29,9 @@ class Market extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        MerchantContainer(),
-                        MerchantContainer(),
-                        MerchantContainer(),
-                        MerchantContainer(),
-                        MerchantContainer(),
-                        MerchantContainer(),
-                        MerchantContainer(),
-                        MerchantContainer(),
-                        MerchantContainer(),
-                      ],
-                    ),
-                  ),
+                  child: ListView.builder(itemBuilder: (context, index) {
+                   return MerchantContainer(category: categories[index],);
+                  },itemCount: categories.length,),
                 ),
               ],
             ),

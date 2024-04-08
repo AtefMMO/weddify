@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:weddify/drawer_screens/my_profile_screen.dart';
 import 'package:weddify/login/user_data.dart';
 
 class HomeDrawer extends StatelessWidget {
   final Function onDrawerItemClick;
   final UserData user;
-
-  const HomeDrawer({super.key, required this.onDrawerItemClick, required this.user});
+final  String facebookUrl='https://www.facebook.com/people/Weddify/61556994101470/?mibextid=ZbWKwL';
+  final  String instagramUrl='https://www.instagram.com/weddi_fy?igsh=MWc2czZ1b2xpbzUxdQ==';
+  const HomeDrawer(
+      {super.key, required this.onDrawerItemClick, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -54,64 +59,54 @@ class HomeDrawer extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
+         Padding(
           padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
-                Icons.settings,
+                Icons.facebook,
                 color: Colors.black,
                 size: 35,
               ),
-              Text(
-                '  Settings',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              InkWell(onTap:()async{
+                if(await canLaunchUrl(Uri.parse(facebookUrl))){
+                  await launchUrl(Uri.parse(facebookUrl));
+                }else{
+                  print('failed to launch');
+                }
+              } ,
+                child: Text(
+                  '  Facebook',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
               )
             ],
           ),
         ),
-        const Padding(
+     Padding(
           padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
               Icon(
-                Icons.list,
+                FontAwesomeIcons.instagram,
                 color: Colors.black,
                 size: 35,
               ),
-              Text(
-                '  Categories',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              InkWell(onTap: ()async{
+                if(await canLaunchUrl(Uri.parse(instagramUrl))){
+                  await launchUrl(Uri.parse(instagramUrl));
+                }else{
+                  print('failed to launch');
+                }
+              },
+                child: Text(
+                  '  Instagram',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
               )
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Icon(
-                Icons.info_outline,
-                color: Colors.black,
-                size: 35,
-              ),
-              Text(
-                '  info',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              )
-            ],
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.all(8),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                '\t \tlog out\t \t',
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.pink),
-            )),
       ],
     );
   }

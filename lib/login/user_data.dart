@@ -16,11 +16,11 @@ class UserData {
     return {'name': name, 'email': email, 'id': id, 'isAdmin': isAdmin, 'isMerchant': isMerchant};
   }
 
-  UserData.fromJson(Map<String, dynamic> userData) {
-    name = userData['name'];
-    email = userData['email'];
-    id = userData['id'];
-    isAdmin = userData['isAdmin'];
-    isMerchant = userData['isMerchant'];
+  UserData.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    email = json['email'];
+    id = json['id'];
+    isAdmin = json['isAdmin'];
+    isMerchant = json['isMerchant'];
   }
 }

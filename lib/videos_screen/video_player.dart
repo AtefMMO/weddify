@@ -1,33 +1,83 @@
-import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:weddify/admin_screens/admin_taps/videos/video_model.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoPlayerScreen extends StatelessWidget {
-  String ?video;
+class VideoPlayerScreen extends StatefulWidget {
+  final VideoData? video;
+
   VideoPlayerScreen([this.video]);
-  final FlickManager flickManager = FlickManager(
-    videoPlayerController:
-        VideoPlayerController.asset('assets/videos/ashry.mp4'),
-    autoPlay: false,
-  );
+
   static const String routeName = 'VideoScreen';
+
+  @override
+  State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
+}
+
+class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  late YoutubePlayerController _controller;
+  bool _isFullScreen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final videoID = YoutubePlayer.convertUrlToId(widget.video!.url!);
+    _controller = YoutubePlayerController(
+      initialVideoId: videoID!,
+      flags: YoutubePlayerFlags(autoPlay: false),
+    );
+    _controller.addListener(_onFullScreenChange);
+  }
+
+  void _onFullScreenChange() {
+    setState(() {
+      _isFullScreen = _controller.value.isFullScreen;
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _isFullScreen
+          ? null
+          : AppBar(
+        title: Text(widget.video!.title!),
+        centerTitle: true,
         leading: InkWell(
           child: Icon(Icons.arrow_back),
           onTap: () {
-            flickManager.dispose();
             Navigator.pop(context);
           },
         ),
       ),
-      body: AspectRatio(
-          aspectRatio: 16 / 9,
-          child: FlickVideoPlayer(
-            flickManager: flickManager,
-          )),
+      body: Stack(
+        children: [
+          YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
+          ),
+          if (_isFullScreen)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                leading: InkWell(
+                  child: Icon(Icons.arrow_back, color: Colors.white),
+                  onTap: () {
+                    _controller.toggleFullScreenMode();
+                  },
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

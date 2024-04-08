@@ -1,47 +1,91 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weddify/admin_screens/admin_taps/videos/add_video_screen.dart';
+import 'package:weddify/admin_screens/admin_taps/videos/add_video_to_firebase.dart';
 import 'package:weddify/admin_screens/admin_taps/videos/admin_video_item.dart';
-import 'package:weddify/videos_screen/video_container.dart';
+import 'package:weddify/admin_screens/admin_taps/videos/video_model.dart';
 
-class VideosAdmin extends StatelessWidget {
+class VideosAdmin extends StatefulWidget {
+  @override
+  State<VideosAdmin> createState() => _NotesAdminState();
+}
+
+class _NotesAdminState extends State<VideosAdmin> {
+  late List<VideoData> videos;
+  bool isLoading = true;
+
+  late int videoIndex;
+  @override
+  void initState() {
+    super.initState();
+    loadVideos();
+  }
+
+  void loadVideos() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    videos = await FirebaseUtilsVideo.getVideoFromFireBase();
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          'assets/images/startScreen.png',
-          fit: BoxFit.fill,
-          height: double.infinity,
-          width: double.infinity,
-        ),
-        Padding(
-          padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/images/startScreen.png',
+            fit: BoxFit.fill,
+            height: double.infinity,
+            width: double.infinity,
+          ),
+          Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
                       onPressed: () {
                         showAddVideoScreen(context);
                       },
-                      child: Text('Add Videos'),
+                      child: Text('Add Video'),
                     ),
-                  ),
-                  AdminVideoItem(),
-                  AdminVideoItem(),
-                  AdminVideoItem(),
-
-                ],
-              ),
+                    SizedBox(width: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        loadVideos();
+                      },
+                      child: Text('ReLoad'),
+                    ),
+                  ],
+                ),
+                isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return AdminVideoItem(
+                              video: videos[index],
+                            );
+                          },
+                          itemCount: videos.length,
+                        ),
+                      )
+              ],
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 

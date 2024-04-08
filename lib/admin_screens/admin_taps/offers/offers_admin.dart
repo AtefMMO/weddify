@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/add_offer_screen.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
@@ -35,6 +33,7 @@ class _OffersAdminState extends State<OffersAdmin> {
       isLoading = false;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -51,36 +50,40 @@ class _OffersAdminState extends State<OffersAdmin> {
           child: Column(
             children: [
               Row(
-
                 children: [
                   ElevatedButton(
                     onPressed: () {
                       showAddOfferScreen(context);
-
                     },
                     child: Text('Add offer'),
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       loadOffers();
-
                     },
                     child: Text('ReLoad'),
                   ),
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
               ),
-
-              isLoading ?Center(child: CircularProgressIndicator(color: Colors.white,)):   Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return offerContainerAdmin(
-                    offer: offers[index],);
-                  },
-                  itemCount: offers.length,
-                ),
-              )
+              isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ))
+                  : Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return offerContainerAdmin(
+                            offer: offers[index],
+                          );
+                        },
+                        itemCount: offers.length,
+                      ),
+                    )
             ],
           ),
         )

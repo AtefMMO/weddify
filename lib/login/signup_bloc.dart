@@ -47,7 +47,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       await UserFirebaseUtils.addUserToDb(
           UserData(email: event.email, name: event.fullName, id: credential.user!.uid, isAdmin: false, isMerchant: false));
 
-      UserData? user = await UserFirebaseUtils.readUserFromDb(credential.user!.uid);
+
 
       Fluttertoast.showToast(
           msg: "Account Created Succesfuly Welcome ${event.fullName}",
@@ -60,7 +60,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       Navigator.pushAndRemoveUntil(
         event.context,
         MaterialPageRoute(builder: (BuildContext context) {
-          return MainScreen(user: user!);
+          return MainScreen();
         }),
         (route) => false,
       );

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/add_offer_to_firebase.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
+import 'package:weddify/merchant_screens/user_image_picker.dart';
 
 class AddOfferScreen extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class AddOfferScreen extends StatefulWidget {
 
 class _AddOfferScreenState extends State<AddOfferScreen> {
   var formKey = GlobalKey<FormState>();
+  File? img;
 
   String offerName = 'Offer title', offerDescription = 'Offer description';
 
@@ -27,68 +31,75 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Padding(
-                padding: const EdgeInsets.all(25),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              hintText: 'Enter Offer title',
-                              hintStyle: Theme.of(context).textTheme.titleSmall,
-                              enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 1, color: Colors.black))),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Invalid Offer Name';
-                            }
-                          },
-                          onChanged: (value) {
-                            offerName = value;
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Offer description',
+              padding: const EdgeInsets.all(25),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            hintText: 'Enter Offer title',
                             hintStyle: Theme.of(context).textTheme.titleSmall,
                             enabledBorder: const UnderlineInputBorder(
                                 borderSide:
-                                    BorderSide(width: 1, color: Colors.black)),
-                          ),
-                          maxLines: 3,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Invalid Offer description';
-                            }
-                          },
-                          onChanged: (value) {
-                            offerDescription = value;
-                          },
+                                    BorderSide(width: 1, color: Colors.black))),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Invalid Offer Name';
+                          }
+                        },
+                        onChanged: (value) {
+                          offerName = value;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Enter Offer description',
+                          hintStyle: Theme.of(context).textTheme.titleSmall,
+                          enabledBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 1, color: Colors.black)),
+                        ),
+                        maxLines: 3,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Invalid Offer description';
+                          }
+                        },
+                        onChanged: (value) {
+                          offerDescription = value;
+                        },
+                      ),
+                    ),
+                    UserImagePicker(
+                      onPickImage: (pickedImage) {
+                        img = pickedImage;
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          addOffer();
+                        },
+                        child: const Text(
+                          'Add Offer',
+                          style: TextStyle(fontSize: 18),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              addOffer();
-                            },
-                            child: const Text(
-                              'Add Offer',
-                              style: TextStyle(fontSize: 18),
-                            )),
-                      )
-                    ],
-                  ),
-                ))
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -100,6 +111,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
       OfferData offer = OfferData(
         title: offerName,
         description: offerDescription,
+        offerImg: img,
       );
 
       try {

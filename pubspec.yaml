@@ -51,7 +51,10 @@ dependencies:
   flutter_bloc: ^8.1.4
   image_picker: ^1.0.7
   firebase_storage: ^11.6.9
-
+  font_awesome_flutter: ^10.7.0
+  url_launcher: ^6.2.5
+  youtube_player_flutter: ^9.0.0
+  shared_preferences: ^2.0.17
 
 dev_dependencies:
   flutter_test:
