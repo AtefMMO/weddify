@@ -77,10 +77,10 @@ class FirebaseUtilsMerchant {
   }
 
   static Future<List<ItemData>> getItemFromFireBase(String uid) async {
-    List<ItemData> tasks = [];
+    List<ItemData> items = [];
     QuerySnapshot<ItemData> snapshot = await getItemCollection(uid).get();
-    tasks = snapshot.docs.map((doc) => doc.data()).toList();
-    return tasks;
+    items = snapshot.docs.map((doc) => doc.data()).toList();
+    return items;
   }
 
   static void updateData(ItemData item, String uid) {

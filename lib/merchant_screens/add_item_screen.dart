@@ -14,10 +14,21 @@ class AddItemScreen extends StatefulWidget {
 
 class _AddItemScreenState extends State<AddItemScreen> {
   var formKey = GlobalKey<FormState>();
-
+  List<String> categories = [
+    'اجهزة منزلية',
+    'ادوات منزلية',
+    'أثاث',
+    'مفروشات',
+    'قاعات',
+    'شركات ليموزين',
+    'مطابخ',
+    'ادوات كهربائية',
+    'ادوات صحية',
+    'ديكورات'
+  ];
   late ItemData _itemData;
   final AddItemBloc _addItemBloc = AddItemBloc();
-
+  String? _selectedItemCategory;
   @override
   void initState() {
     super.initState();
@@ -111,6 +122,36 @@ class _AddItemScreenState extends State<AddItemScreen> {
                             ),
                           ),
                           Padding(
+                            padding: const EdgeInsets.only(top: 15,bottom: 10),
+                            child: Text(
+                              'Select Item Category',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          DropdownButtonFormField<String>(
+                            value: _selectedItemCategory,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedItemCategory = newValue;
+                              });
+                            },
+                            items: categories
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            decoration: InputDecoration(
+                              labelText: 'Select an item',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          Padding(
                             padding: const EdgeInsets.only(top: 15),
                             child: Text(
                               'Select Item Image',
@@ -136,18 +177,22 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                 print(_itemData.title);
                                 print(_itemData.description);
                                 print(_itemData.price);
-                                _addItemBloc.add(
-                                  AddItemEvent.onSaveItem(
-                                    id: widget.id,
-                                    itemModel: ItemData(
-                                      description: _itemData.description,
-                                      price: _itemData.price,
-                                      title: _itemData.title,
-                                      selectedImage: _itemData.selectedImage!,
+                                if(formKey.currentState!.validate()){
+                                  _addItemBloc.add(
+                                    AddItemEvent.onSaveItem(
+                                      id: widget.id,
+                                      itemModel: ItemData(
+                                        description: _itemData.description,
+                                        price: _itemData.price,
+                                        title: _itemData.title,
+                                        selectedImage: _itemData.selectedImage!,
+                                        category: _selectedItemCategory,
+                                      ),
+                                      context: context,
                                     ),
-                                    context: context,
-                                  ),
-                                );
+                                  );
+                                }
+
                               },
                               child: const Text(
                                 'Add Item',
@@ -168,13 +213,5 @@ class _AddItemScreenState extends State<AddItemScreen> {
     );
   }
 
-  void addItem(String uid) async {
-    if (formKey.currentState!.validate()) {
-      ItemData note = ItemData(
-        title: _itemData.title,
-        description: _itemData.description,
-        price: _itemData.price,
-      );
-    }
-  }
+
 }

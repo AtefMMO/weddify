@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/firebase_utils.dart';
+import 'package:weddify/market_screen/market_cubit.dart';
 import 'package:weddify/market_screen/market_tap.dart';
 import 'package:weddify/notes_screen/notes_cubit.dart';
 import 'package:weddify/notes_screen/notes_tap.dart';
@@ -51,7 +52,8 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BlocProvider(
             create: (context) => VideoCubit(),
-          )
+          ),
+
         ],
         child: UserFirebaseUtils.isReady
             ? Scaffold(

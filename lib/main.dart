@@ -6,6 +6,7 @@ import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/cache_helper.dart';
 import 'package:weddify/init_route.dart';
 import 'package:weddify/login/user_data.dart';
+import 'package:weddify/market_screen/category_screen.dart';
 import 'package:weddify/market_screen/market_tap.dart';
 import 'package:weddify/merchant_screens/merchant_main_screen.dart';
 import 'package:weddify/videos_screen/video_player.dart';
@@ -59,7 +60,8 @@ class MyApp extends StatelessWidget {
         VideoPlayerScreen.routeName: (context) => VideoPlayerScreen(),
         MerchantMainScreen.routeName: (context) => MerchantMainScreen(
             id: ModalRoute.of(context)!.settings.arguments as String),
-        MainScreenAdmin.routeName: (context) => MainScreenAdmin()
+        MainScreenAdmin.routeName: (context) => MainScreenAdmin(),
+        CategoryScreen.routeName:(context)=>CategoryScreen()
       },
       debugShowCheckedModeBanner: false,
     );

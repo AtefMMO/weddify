@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/firebase_utils.dart';
+import 'package:weddify/login/user_data.dart';
 import 'package:weddify/merchant_screens/add_item_screen.dart';
 import 'package:weddify/merchant_screens/items_screen.dart';
 import 'package:weddify/merchant_screens/settings_screen.dart';
@@ -20,12 +23,22 @@ class MerchantMainScreen extends StatefulWidget {
 }
 
 class _MerchantMainScreenState extends State<MerchantMainScreen> {
-  List<Widget> tapsList = [const ItemsScreen(), const SettingsScreen()];
+  late List<Widget> tapsList ;
   int selectedIndex = 0;
+  @override
   void initState() {
     super.initState();
     UserFirebaseUtils.readUserFromDb();
-    print(UserFirebaseUtils.isReady);
+    _startDelayedAction();
+    tapsList = [ItemsScreen(id: widget.id), const SettingsScreen()];
+  }
+
+  void _startDelayedAction() {
+    Timer(Duration(seconds: 6), () {
+      setState(() {
+        UserFirebaseUtils.isReady = true;
+      });
+    });
   }
 
   @override
@@ -52,8 +65,8 @@ class _MerchantMainScreenState extends State<MerchantMainScreen> {
               backgroundColor: Colors.white,
               centerTitle: true,
               title: Text(
-                selectedIndex == 0 ? 'Merchant\'s Name' : 'Settings',
-                style: Theme.of(context).textTheme.titleLarge,
+                selectedIndex == 0 ? 'Merchant ${UserFirebaseUtils.userModel!.name!}' : 'Settings',
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
             bottomNavigationBar: BottomAppBar(

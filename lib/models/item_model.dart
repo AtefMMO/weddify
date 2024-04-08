@@ -9,7 +9,7 @@ class ItemData {
   String? imageUrl;
   File? selectedImage;
   String? category;
-  ItemData({this.title, this.description, this.price, this.id, this.imageUrl, this.selectedImage});
+  ItemData({this.title, this.description, this.price, this.id, this.imageUrl, this.selectedImage, this.category});
 
   Map<String, dynamic> toFireStore() {
     return {

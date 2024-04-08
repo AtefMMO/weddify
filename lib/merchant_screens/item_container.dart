@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:weddify/firebase_utils.dart';
 import 'package:weddify/merchant_screens/edit_item_screen.dart';
+import 'package:weddify/models/item_model.dart';
+
+import '../constants.dart';
 
 class Item extends StatelessWidget {
+ late ItemData item;
+  Item({required this.item});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,6 +21,7 @@ class Item extends StatelessWidget {
           children: [
             SlidableAction(
               onPressed: (context) {
+               deleteItem(uid!, item);//user id and item data
                 Fluttertoast.showToast(
                     msg: "Item Deleted Successfully",
                     toastLength: Toast.LENGTH_SHORT,
@@ -58,7 +65,11 @@ class Item extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'Item',
+                       item.title??'item',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        item.category??'non',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
@@ -91,5 +102,8 @@ class Item extends StatelessWidget {
   void showEditScreen(BuildContext context) {
     showModalBottomSheet(
         context: context, builder: (context) => EditItemScreen());
+  }
+  deleteItem(String id,ItemData item){
+    FirebaseUtilsMerchant.deleteData(item, id);
   }
 }

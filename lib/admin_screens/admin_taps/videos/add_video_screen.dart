@@ -16,7 +16,7 @@ class _AddOfferScreenState extends State<AddVideoScreen> {
   var formKey = GlobalKey<FormState>();
 
   String videoName = 'Video title', videoUrl = '';
- File? videoImg;
+  File? videoImg;
 
   @override
   Widget build(BuildContext context) {
