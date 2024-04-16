@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weddify/admin_screens/admin_taps/offers/offer_model.dart';
 
-class Offer extends StatelessWidget {
+class OfferContainer extends StatelessWidget {
   OfferData offer;
-  Offer({required this.offer});
+  OfferContainer({super.key, required this.offer});
   @override
   Widget build(BuildContext context) {
     return Padding(
