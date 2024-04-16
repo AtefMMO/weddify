@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weddify/admin_screens/admin_taps/videos/video_model.dart';
+import 'package:weddify/app_theme/app_theme.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -46,17 +47,19 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       appBar: _isFullScreen
           ? null
           : AppBar(
-        title: Text(widget.video!.title!),
-        centerTitle: true,
-        leading: InkWell(
-          child: Icon(Icons.arrow_back),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+              backgroundColor: AppTheme.mainColor,
+              title: Text(widget.video!.title!),
+              centerTitle: true,
+              leading: InkWell(
+                child: Icon(Icons.arrow_back),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
       body: Stack(
         children: [
+          Container(color: AppTheme.secondaryColor,),
           YoutubePlayer(
             controller: _controller,
             showVideoProgressIndicator: true,
