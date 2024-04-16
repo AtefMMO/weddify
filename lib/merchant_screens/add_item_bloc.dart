@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:weddify/custom_widgets/dialog_utils.dart';
 import 'package:weddify/models/item_model.dart';
 
 import '../firebase_utils.dart';
@@ -32,10 +33,12 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     on<_onSaveItemAddItemEvent>(_onSaveItem);
   }
 
-  FutureOr<void> _onSaveItem(_onSaveItemAddItemEvent event, Emitter<AddItemState> emit) async {
+  FutureOr<void> _onSaveItem(
+      _onSaveItemAddItemEvent event, Emitter<AddItemState> emit) async {
     try {
+      DialogUtils.showLoading(event.context, 'Loading');
       await FirebaseUtilsMerchant.addItemToFirebase(event.itemModel, event.id);
-
+DialogUtils.hideLoading(event.context);
       print('Item Added Successfully');
       Navigator.pop(event.context);
       Fluttertoast.showToast(

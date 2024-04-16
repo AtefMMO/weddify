@@ -13,18 +13,13 @@ class MyProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink,
+        backgroundColor: AppTheme.mainColor,
         title: Text('Weddify'),
         centerTitle: true,
       ),
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/startScreen.png',
-            fit: BoxFit.fill,
-            height: double.infinity,
-            width: double.infinity,
-          ),
+
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(12),
@@ -213,7 +208,7 @@ class MyProfileScreen extends StatelessWidget {
                               style: TextStyle(color: Colors.white),
                             ),
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.pink),
+                                backgroundColor: AppTheme.mainColor),
                           )),
                     ],
                   ),

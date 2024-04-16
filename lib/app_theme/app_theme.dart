@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const _textColor = Colors.black87;
-  static Color selectedPurble = const Color(0xff36003C);
-  static Color unselectedPurble = const Color(0xff89658B);
+  static const textColor = Colors.black87;
+  static Color selectedItem = const Color(0xff000000);
+  static Color unselectedItem = const Color(0xffFFFFFF);
   static Color lightGrey = const Color(0xffD9D9D9);
-
+  static Color mainColor = const Color(0xff4C9ECD);
+  static Color secondaryColor = const Color(0xffF7E2D1);
   static ThemeData appTheme = ThemeData(
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedItemColor: selectedPurble,
-      unselectedItemColor: unselectedPurble,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
+      selectedItemColor: selectedItem,
+      unselectedItemColor: unselectedItem,
+      backgroundColor: mainColor,
     ),
+    canvasColor: mainColor,
   );
 }

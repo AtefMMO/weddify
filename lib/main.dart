@@ -27,7 +27,7 @@ void main() async {
     if (isAdmin ?? false) {
       widget = MainScreenAdmin();
     } else if (isMerchant ?? false) {
-      widget = MerchantMainScreen(id: uid!);
+      widget = MerchantMainScreen(id: uid!,);
     } else {
       widget = MainScreen();
     }

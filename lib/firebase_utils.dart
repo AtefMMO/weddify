@@ -57,24 +57,26 @@ class FirebaseUtilsMerchant {
           toFirestore: (value, options) => value.toFireStore(),
         );
   }
-
   static Future<void> addItemToFirebase(ItemData item, String userId) async {
     var collection = getItemCollection(userId);
     var doc = collection.doc();
     item.id = doc.id;
+
+
     final storageRef = FirebaseStorage.instance
         .ref()
         .child('items_images')
-        .child('$userId.jpg'); // create path in firebase
-    if (item.selectedImage != null) {
-      await storageRef.putFile(
-          item.selectedImage!); // send the selected image url to firebase
+        .child('$userId-${doc.id}.jpg');
 
+    if (item.selectedImage != null) {
+      await storageRef.putFile(item.selectedImage!);
       final imageUrl = await storageRef.getDownloadURL();
       item.imageUrl = imageUrl;
     }
+
     return doc.set(item);
   }
+
 
   static Future<List<ItemData>> getItemFromFireBase(String uid) async {
     List<ItemData> items = [];

@@ -11,14 +11,17 @@ class Note extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color.fromARGB(255, 255, 245, 216)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.white),
           height: MediaQuery.of(context).size.height * 0.2,
           width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(note!.title ?? 'Note'),
-              Text(note!.description ?? 'Description'),
+              Center(child: Text(note!.title ?? 'Note',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(note!.description ?? 'Description',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
+              ),
             ],
           ),
         ),

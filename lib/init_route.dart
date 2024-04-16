@@ -58,18 +58,20 @@ class _MainScreenState extends State<MainScreen> {
                 resizeToAvoidBottomInset: false,
                 body: taps[selectedIndex],
                 appBar: AppBar(
-                  title: Text('Weddify', style: TextStyle(color: Colors.black)),
-                  backgroundColor: Colors.blue,
+                  title: Text('Weddify', style: TextStyle(color: AppTheme.textColor)),
+                  backgroundColor: AppTheme.mainColor,
                   centerTitle: true,
                 ),
                 bottomNavigationBar: BottomNavigationBar(
+
                   onTap: (value) {
                     selectedIndex = value;
                     setState(() {});
                   },
+                  backgroundColor: AppTheme.mainColor,
                   currentIndex: selectedIndex,
-                  selectedItemColor: AppTheme.selectedPurble,
-                  unselectedItemColor: AppTheme.unselectedPurble,
+                  selectedItemColor: AppTheme.selectedItem,
+                  unselectedItemColor: AppTheme.unselectedItem,
                   items: [
                     BottomNavigationBarItem(icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
                     BottomNavigationBarItem(icon: Icon(Icons.note_rounded), label: 'Notes'),

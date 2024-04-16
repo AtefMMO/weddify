@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/firebase_utils.dart';
-import 'package:weddify/login/user_data.dart';
+
 import 'package:weddify/merchant_screens/add_item_screen.dart';
 import 'package:weddify/merchant_screens/items_screen.dart';
 import 'package:weddify/merchant_screens/settings_screen.dart';
@@ -16,8 +16,8 @@ import '../login/login_screen.dart';
 class MerchantMainScreen extends StatefulWidget {
   static const String routeName = 'MerchantMainScreen';
   final String id;
-
-  const MerchantMainScreen({super.key, required this.id});
+  final String? name;
+  const MerchantMainScreen({super.key, required this.id,this.name});
   @override
   State<MerchantMainScreen> createState() => _MerchantMainScreenState();
 }
@@ -71,12 +71,14 @@ class _MerchantMainScreenState extends State<MerchantMainScreen> {
             ),
             bottomNavigationBar: BottomAppBar(
               height: MediaQuery.of(context).size.height * 0.1,
-              color: Colors.white,
+              color: AppTheme.mainColor,
               notchMargin: 6,
               shape: const CircularNotchedRectangle(),
               child: BottomNavigationBar(
-                unselectedItemColor: AppTheme.unselectedPurble,
-                selectedItemColor: AppTheme.selectedPurble,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                unselectedItemColor: AppTheme.unselectedItem,
+                selectedItemColor: AppTheme.selectedItem,
                 onTap: (index) {
                   selectedIndex = index;
                   setState(() {});
@@ -128,6 +130,7 @@ class _MerchantMainScreenState extends State<MerchantMainScreen> {
         context: context,
         builder: (context) => AddItemScreen(
               id: widget.id,
+          name: UserFirebaseUtils.userModel!.name!,
             ));
   }
 }
