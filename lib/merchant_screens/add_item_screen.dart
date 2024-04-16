@@ -5,9 +5,9 @@ import 'package:weddify/merchant_screens/user_image_picker.dart';
 import 'package:weddify/models/item_model.dart';
 
 class AddItemScreen extends StatefulWidget {
-  const AddItemScreen({super.key, required this.id});
+  const AddItemScreen({super.key, required this.id,required this.name});
   final String id;
-
+  final String name;
   @override
   State<AddItemScreen> createState() => _AddItemScreenState();
 }
@@ -132,7 +132,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          DropdownButtonFormField<String>(
+                          DropdownButtonFormField<String>(dropdownColor: Colors.white,
                             value: _selectedItemCategory,
                             onChanged: (String? newValue) {
                               setState(() {
@@ -185,8 +185,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                         description: _itemData.description,
                                         price: _itemData.price,
                                         title: _itemData.title,
-                                        selectedImage: _itemData.selectedImage!,
+                                        selectedImage: _itemData.selectedImage,
                                         category: _selectedItemCategory,
+                                        seller: widget.name
                                       ),
                                       context: context,
                                     ),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/firebase_utils.dart';
-import 'package:weddify/market_screen/market_cubit.dart';
 import 'package:weddify/market_screen/market_tap.dart';
 import 'package:weddify/notes_screen/notes_cubit.dart';
 import 'package:weddify/notes_screen/notes_tap.dart';
@@ -53,34 +52,31 @@ class _MainScreenState extends State<MainScreen> {
           BlocProvider(
             create: (context) => VideoCubit(),
           ),
-
         ],
         child: UserFirebaseUtils.isReady
             ? Scaffold(
                 resizeToAvoidBottomInset: false,
                 body: taps[selectedIndex],
                 appBar: AppBar(
-                  title: Text('Weddify', style: TextStyle(color: Colors.black)),
-                  backgroundColor: Colors.pink,
+                  title: Text('Weddify', style: TextStyle(color: AppTheme.textColor)),
+                  backgroundColor: AppTheme.mainColor,
                   centerTitle: true,
                 ),
                 bottomNavigationBar: BottomNavigationBar(
+
                   onTap: (value) {
                     selectedIndex = value;
                     setState(() {});
                   },
+                  backgroundColor: AppTheme.mainColor,
                   currentIndex: selectedIndex,
-                  selectedItemColor: AppTheme.selectedPurble,
-                  unselectedItemColor: AppTheme.unselectedPurble,
+                  selectedItemColor: AppTheme.selectedItem,
+                  unselectedItemColor: AppTheme.unselectedItem,
                   items: [
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.note_rounded), label: 'Notes'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.video_collection), label: 'Videos'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.shop), label: 'Buy Now')
+                    BottomNavigationBarItem(icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
+                    BottomNavigationBarItem(icon: Icon(Icons.note_rounded), label: 'Notes'),
+                    BottomNavigationBarItem(icon: Icon(Icons.video_collection), label: 'Videos'),
+                    BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Buy Now')
                   ],
                 ),
                 drawer: Drawer(

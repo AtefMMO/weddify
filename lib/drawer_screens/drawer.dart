@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:weddify/app_theme/app_theme.dart';
 
 import 'package:weddify/drawer_screens/my_profile_screen.dart';
 import 'package:weddify/login/user_data.dart';
@@ -23,11 +24,11 @@ final  String facebookUrl='https://www.facebook.com/people/Weddify/6155699410147
             Container(
               height: MediaQuery.of(context).size.height * 0.225,
               width: double.infinity,
-              color: Colors.pink,
+              color: AppTheme.mainColor,
               child: Padding(
                 padding: const EdgeInsets.only(top: 70),
                 child: Text(
-                  'Hello! ${user.name}',
+                  'Hello ${user.name}',
                   style: const TextStyle(fontSize: 30, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),

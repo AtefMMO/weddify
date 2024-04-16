@@ -1,20 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weddify/admin_screens/admin_taps/videos/video_model.dart';
 import 'package:weddify/videos_screen/video_player.dart';
 
-class Video extends StatelessWidget {
+class VideoContainer extends StatelessWidget {
   VideoData video;
 
-  Video({required this.video});
+  VideoContainer({super.key, required this.video});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.white),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
         height: MediaQuery.of(context).size.height * 0.2,
         width: MediaQuery.of(context).size.width * 0.85,
         child: Center(
@@ -23,7 +21,7 @@ class Video extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => VideoPlayerScreen(video!),
+                  builder: (context) => VideoPlayerScreen(video),
                 ),
               );
             },
@@ -35,7 +33,7 @@ class Video extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                 ),
-                Center(
+                const Center(
                   child: Icon(
                     Icons.play_circle,
                     size: 50,

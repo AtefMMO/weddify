@@ -9,7 +9,8 @@ class ItemData {
   String? imageUrl;
   File? selectedImage;
   String? category;
-  ItemData({this.title, this.description, this.price, this.id, this.imageUrl, this.selectedImage, this.category});
+  String? seller;
+  ItemData({this.title, this.description, this.price, this.id, this.imageUrl, this.selectedImage, this.category,this.seller});
 
   Map<String, dynamic> toFireStore() {
     return {
@@ -18,7 +19,8 @@ class ItemData {
       'price': price,
       'id': id,
       'imageUrl': imageUrl,
-      'category':category
+      'category':category,
+      'seller':seller
     };
   }
 
@@ -30,5 +32,6 @@ class ItemData {
     imageUrl = itemModel['imageUrl'];
     selectedImage = itemModel['selectedImage'];
     category=itemModel['category'];
+    seller=itemModel['seller'];
   }
 }

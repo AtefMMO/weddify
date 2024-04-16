@@ -9,20 +9,27 @@ class ItemUserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white10,
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
-          Container(
-              height: MediaQuery.of(context).size.height * 0.2,
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: Image.network(
-                item.imageUrl!,
-                height: double.infinity,
-                width: double.infinity,
-                fit: BoxFit.fill,
-              )),
-          Text(item.title ?? 'title'),
-          Text(item.price ?? '\$\$\$'),
+
+          InkWell(onTap: () {
+            print(item.imageUrl);
+          },
+            child: Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                width: MediaQuery.of(context).size.width * 0.47,
+                child: Image.network(
+                  item.imageUrl!,
+                  height: double.infinity,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                )),
+          ),
+          Text('title: ${item.title}'),
+          Text('price: ${item.price}'),
+          Text('sold by: ${item.seller}'),
         ],
       ),
     );

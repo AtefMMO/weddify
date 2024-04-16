@@ -49,14 +49,14 @@ class _MainScreenState extends State<MainScreenAdmin> {
                 title: Text('Admin', style: TextStyle(color: Colors.black)),
                 backgroundColor: Colors.pink,
                 centerTitle: true),
-            bottomNavigationBar: BottomNavigationBar(
+            bottomNavigationBar: BottomNavigationBar(backgroundColor:AppTheme.mainColor ,
               onTap: (value) {
                 selectedIndex = value;
                 setState(() {});
               },
               currentIndex: selectedIndex,
-              selectedItemColor: AppTheme.selectedPurble,
-              unselectedItemColor: AppTheme.unselectedPurble,
+              selectedItemColor: AppTheme.selectedItem,
+              unselectedItemColor: AppTheme.unselectedItem,
               items: [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
