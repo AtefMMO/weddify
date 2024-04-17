@@ -76,7 +76,7 @@ class Item extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
+        /*      InkWell(
                 onTap: () {
                   showEditScreen(context);
                 },
@@ -91,7 +91,7 @@ class Item extends StatelessWidget {
                     child: Icon(Icons.edit, color: Colors.white, size: 20),
                   ),
                 ),
-              )
+              )*/
             ],
           ),
         ),

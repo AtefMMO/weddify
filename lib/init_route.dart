@@ -89,7 +89,7 @@ class _MainScreenState extends State<MainScreen> {
                 backgroundColor: const Color(0xff474646),
                 body: Center(
                   child: CircularProgressIndicator(
-                    color: Colors.pink,
+                    color: AppTheme.mainColor,
                   ),
                 )));
   }

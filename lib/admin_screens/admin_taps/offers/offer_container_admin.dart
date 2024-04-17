@@ -71,7 +71,7 @@ late OfferData offer;
                   ),
                 ),
               ),
-              InkWell(
+       /*       InkWell(
                 onTap: () {
                   showEditScreen(context,offer);
                 },
@@ -86,7 +86,7 @@ late OfferData offer;
                     child: Icon(Icons.edit, color: Colors.white, size: 20),
                   ),
                 ),
-              )
+              )*/
             ],
           ),
         ),

@@ -62,7 +62,7 @@ class _MerchantMainScreenState extends State<MerchantMainScreen> {
                   });
                 },
               ),
-              backgroundColor: Colors.white,
+              backgroundColor: AppTheme.mainColor,
               centerTitle: true,
               title: Text(
                 selectedIndex == 0 ? 'Merchant ${UserFirebaseUtils.userModel!.name!}' : 'Settings',
@@ -119,7 +119,7 @@ class _MerchantMainScreenState extends State<MerchantMainScreen> {
               },
               child: Center(
                 child: CircularProgressIndicator(
-                  color: Colors.pink,
+                  color: AppTheme.mainColor,
                 ),
               ),
             ));

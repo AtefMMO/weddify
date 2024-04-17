@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreenAdmin> {
                   },
                 ),
                 title: Text('Admin', style: TextStyle(color: Colors.black)),
-                backgroundColor: Colors.pink,
+                backgroundColor: AppTheme.mainColor,
                 centerTitle: true),
             bottomNavigationBar: BottomNavigationBar(backgroundColor:AppTheme.mainColor ,
               onTap: (value) {
@@ -77,7 +77,7 @@ class _MainScreenState extends State<MainScreenAdmin> {
               },
               child: Center(
                 child: CircularProgressIndicator(
-                  color: Colors.pink,
+                  color: AppTheme.mainColor,
                 ),
               ),
             ));
