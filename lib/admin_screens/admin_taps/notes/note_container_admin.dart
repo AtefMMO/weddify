@@ -72,7 +72,7 @@ class noteContainerAdmin extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
+         /*     InkWell(
                 onTap: () {
                   showEditScreen(context,note);
                 },
@@ -87,7 +87,7 @@ class noteContainerAdmin extends StatelessWidget {
                     child: Icon(Icons.edit, color: Colors.white, size: 20),
                   ),
                 ),
-              )
+              )*/
             ],
           ),
         ),

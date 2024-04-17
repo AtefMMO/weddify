@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/custom_widgets/custom_text_form_field.dart';
 import 'package:weddify/login/signup_screen.dart';
 
@@ -110,7 +111,7 @@ class LogInScreen extends StatelessWidget {
                                 InkWell(
                                   child: const Text(
                                     ' here',
-                                    style: TextStyle(color: Colors.purpleAccent),
+                                    style: TextStyle(color: Colors.lightBlue),
                                   ),
                                   onTap: () {
                                     Navigator.pushNamed(context, SignUpScreen.routeName);

@@ -165,7 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               InkWell(
                                 child: const Text(
                                   ' here',
-                                  style: TextStyle(color: Colors.purpleAccent),
+                                  style: TextStyle(color: Colors.lightBlue),
                                 ),
                                 onTap: () {
                                   Navigator.pushReplacementNamed(

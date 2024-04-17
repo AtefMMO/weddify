@@ -37,12 +37,7 @@ class _NotesAdminState extends State<NotesAdmin> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(
-          'assets/images/startScreen.png',
-          fit: BoxFit.fill,
-          height: double.infinity,
-          width: double.infinity,
-        ),
+
         Padding(
           padding:
               EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
