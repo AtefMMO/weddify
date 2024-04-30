@@ -1,14 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weddify/app_theme/app_theme.dart';
+import 'package:weddify/market_screen/item_user_view.dart';
 import 'package:weddify/market_screen/merchant_container.dart';
+import 'package:weddify/market_screen/search_cubit.dart';
 
-class Market extends StatelessWidget {
-  List <String> categories=['اجهزة منزلية','ادوات منزلية','أثاث','مفروشات','قاعات','شركات ليموزين','مطابخ','ادوات كهربائية','ادوات صحية','ديكورات'];
+class Market extends StatefulWidget {
+  @override
+  State<Market> createState() => _MarketState();
+}
+
+class _MarketState extends State<Market> {
+  List<String> categories = [
+    'House Appliances      اجهزة منزلية',
+    'ادوات منزلية',
+    'أثاث',
+    'مفروشات',
+    'قاعات',
+    'شركات ليموزين',
+    'مطابخ',
+    'ادوات كهربائية',
+    'ادوات صحية',
+    'ديكورات'
+  ];
+
+  String query = '';
+  String previousQuery = '';
   @override
   Widget build(BuildContext context) {
-    return Container(color: AppTheme.secondaryColor,
+    return Container(
+      color: AppTheme.secondaryColor,
       child: Padding(
         padding:
             EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
@@ -16,17 +39,89 @@ class Market extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 15),
-                child: Text(
-                  ' Merchants',
-                  style: TextStyle(color: Colors.black, fontSize: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Search...',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide(color: AppTheme.mainColor),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                  ),
+                  onChanged: (value) {
+                    query = value;
+                    setState(() {});
+                  },
                 ),
               ),
-              Expanded(
-                child: ListView.builder(itemBuilder: (context, index) {
-                 return MerchantContainer(category: categories[index],);
-                },itemCount: categories.length,),
-              ),
+              query.isEmpty
+                  ? Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return MerchantContainer(
+                            category: categories[index],
+                          );
+                        },
+                        itemCount: categories.length,
+                      ),
+                    )
+                  : Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          BlocBuilder<SearchCubit, SearchState>(
+                            builder: (context, state) {
+                              if (state.items.isNotEmpty) {
+                                if (previousQuery != query) {
+                                  previousQuery = query;
+                                  BlocProvider.of<SearchCubit>(context)
+                                      .clearItems();
+                                  BlocProvider.of<SearchCubit>(context)
+                                      .getItems(query!);
+                                }
+                                return Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(14),
+                                  child: GridView.builder(
+                                      itemCount: state.items.length,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 8.0,
+                                        mainAxisSpacing: 8.0,
+                                        childAspectRatio: 0.75,
+                                      ),
+                                      itemBuilder: (context, index) {
+                                        return ItemUserView(
+                                            item: state.items[index]);
+                                      }),
+                                ));
+                              } else {
+                                BlocProvider.of<SearchCubit>(context)
+                                    .getItems(query!);
+                                previousQuery = query;
+
+                                return const Center(
+                                  child: Text(
+                                    'Item Not Found',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 25),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
             ],
           ),
         ),
