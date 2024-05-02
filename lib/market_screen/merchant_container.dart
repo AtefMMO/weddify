@@ -21,7 +21,7 @@ class MerchantContainer extends StatelessWidget {
           child: Center(
               child: Text(
             category ?? 'Category Name',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20,fontFamily: 'RTL-MochaYemen-Sugar'),
           )),
         ),
       ),
