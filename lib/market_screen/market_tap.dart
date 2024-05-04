@@ -14,7 +14,7 @@ class Market extends StatefulWidget {
 
 class _MarketState extends State<Market> {
   List<String> categories = [
-    'House Appliances      اجهزة منزلية',
+    'اجهزة منزلية',
     'ادوات منزلية',
     'أثاث',
     'مفروشات',
@@ -25,7 +25,30 @@ class _MarketState extends State<Market> {
     'ادوات صحية',
     'ديكورات'
   ];
-
+  List<String> categoriesTranslated = [
+    'Appliances',
+    'Housewares',
+    'Furniture',
+    'Bed cover',
+    'Wedding halls',
+    'Limousine companies',
+    'Kitchens',
+    'Electrical Tools',
+    'Healthy Equipment',
+    'Decorations'
+  ];
+  List<String> categoriesImages = [
+    'assets/images/Kitchens.jpg',
+    'assets/images/Housewares.jpg',
+    'assets/images/Furniture.jpg',
+    'assets/images/Bed cover.jpg',
+    'assets/images/Wedding halls.jpg',
+    'assets/images/Limousine companies.jpg',
+    'assets/images/Kitchens.jpg',
+    'assets/images/Electrical Tools.jpg',
+    'assets/images/Healthy Equipment.jpg',
+    'assets/images/Decorations.jpg'
+  ];
   String query = '';
   String previousQuery = '';
   @override
@@ -67,6 +90,8 @@ class _MarketState extends State<Market> {
                         itemBuilder: (context, index) {
                           return MerchantContainer(
                             category: categories[index],
+                            categoryTranslate: categoriesTranslated[index],
+                            categoryImage: categoriesImages[index],
                           );
                         },
                         itemCount: categories.length,

@@ -4,36 +4,35 @@ import 'package:weddify/app_theme/app_theme.dart';
 import 'package:weddify/market_screen/item_user_view.dart';
 import 'package:weddify/market_screen/market_cubit.dart';
 
-
-
 class CategoryScreen extends StatelessWidget {
-
   static const String routeName = 'CategoryScreen';
-
 
   @override
   Widget build(BuildContext context) {
-    final String ? category = ModalRoute
-        .of(context)!
-        .settings
-        .arguments as String;
+    final String? category =
+        ModalRoute.of(context)!.settings.arguments as String;
     return BlocProvider(
       create: (context) => MarketCubit(),
       child: Scaffold(
-        appBar: AppBar(backgroundColor: AppTheme.mainColor,
-          title: Text(category ?? 'category'), centerTitle: true,
+        appBar: AppBar(
+          backgroundColor: AppTheme.mainColor,
+          title: Text(category ?? 'category',style: const TextStyle(fontFamily: 'RTL-MochaYemen-Sugar'),),
+          centerTitle: true,
         ),
-        body: Container(color: AppTheme.secondaryColor,
+        body: Container(
+          color: AppTheme.secondaryColor,
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: Column(mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BlocBuilder<MarketCubit, MarketState>(
                   builder: (context, state) {
                     if (state.items.isNotEmpty) {
                       return Expanded(
                         child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 8.0,
                             mainAxisSpacing: 8.0,
@@ -45,7 +44,6 @@ class CategoryScreen extends StatelessWidget {
                           },
                         ),
                       );
-
                     } else {
                       BlocProvider.of<MarketCubit>(context).getItems(category!);
                       return Center(child: CircularProgressIndicator());

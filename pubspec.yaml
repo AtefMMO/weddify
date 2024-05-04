@@ -56,6 +56,7 @@ dependencies:
   youtube_player_flutter: ^9.0.0
   shared_preferences: ^2.0.17
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -97,17 +98,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+     - family: Agile
+       fonts:
+         - asset: assets/fonts/Agile.otf
+
+
+     - family: RTL-MochaYemen-Sugar
+       fonts:
+         - asset: assets/fonts/RTL-MochaYemen-Sugar.otf
+
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

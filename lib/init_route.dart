@@ -62,8 +62,8 @@ class _MainScreenState extends State<MainScreen> {
                 resizeToAvoidBottomInset: false,
                 body: taps[selectedIndex],
                 appBar: AppBar(
-                  title: Text('Weddify',
-                      style: TextStyle(color: AppTheme.textColor)),
+                  title: const Text('Weddify',
+                      style: TextStyle(color: Colors.black,fontFamily: 'Agile',fontWeight: FontWeight.bold)),
                   backgroundColor: AppTheme.mainColor,
                   centerTitle: true,
                 ),
