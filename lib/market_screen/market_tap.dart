@@ -29,7 +29,7 @@ class _MarketState extends State<Market> {
     'Appliances',
     'Housewares',
     'Furniture',
-    'Bed cover',
+    'Home Furnishings',
     'Wedding halls',
     'Limousine companies',
     'Kitchens',
@@ -38,7 +38,7 @@ class _MarketState extends State<Market> {
     'Decorations'
   ];
   List<String> categoriesImages = [
-    'assets/images/Kitchens.jpg',
+    'assets/images/Appliances.jpg',
     'assets/images/Housewares.jpg',
     'assets/images/Furniture.jpg',
     'assets/images/Bed cover.jpg',
