@@ -20,10 +20,10 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
   void _pickImage() async {
     final pickedImage = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 50,
-      maxWidth: 150,
-    );
+        source: ImageSource.gallery,
+        imageQuality: 90,
+        maxWidth: 800,
+        maxHeight: 600);
 
     if (pickedImage == null) {
       return;
@@ -43,7 +43,8 @@ class _UserImagePickerState extends State<UserImagePicker> {
         CircleAvatar(
           radius: 40,
           backgroundColor: Colors.grey,
-          foregroundImage: pickedImageFile != null ? FileImage(pickedImageFile!) : null,
+          foregroundImage:
+              pickedImageFile != null ? FileImage(pickedImageFile!) : null,
         ),
         TextButton.icon(
           onPressed: _pickImage,
