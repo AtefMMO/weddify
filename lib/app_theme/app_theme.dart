@@ -6,13 +6,15 @@ class AppTheme {
   static Color unselectedItem = const Color(0xffFFFFFF);
   static Color lightGrey = const Color(0xffD9D9D9);
   static Color mainColor = const Color(0xff4C9ECD);
-  static Color secondaryColor = const Color(0xffF7E2D1);
+  static Color secondaryColor = Colors.white;
+  static Color orangeColor = const Color( 0xffDE6F37);
+  static Color blueColor = const Color( 0xff2D549B);
   static ThemeData appTheme = ThemeData(
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedItemColor: selectedItem,
       unselectedItemColor: unselectedItem,
-      backgroundColor: mainColor,
+      backgroundColor: Colors.transparent,
     ),
-    canvasColor: mainColor,
+    canvasColor: Colors.transparent,
   );
 }

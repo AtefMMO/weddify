@@ -62,30 +62,57 @@ class _MainScreenState extends State<MainScreen> {
                 resizeToAvoidBottomInset: false,
                 body: taps[selectedIndex],
                 appBar: AppBar(
+                  flexibleSpace: Container(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: <Color>[
+                          AppTheme.orangeColor,
+                          AppTheme.blueColor
+                        ])),
+                  ),
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
                   title: const Text('Weddify',
-                      style: TextStyle(color: Colors.black,fontFamily: 'Agile',fontWeight: FontWeight.bold)),
-                  backgroundColor: AppTheme.mainColor,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Agile',
+                          fontWeight: FontWeight.bold)),
                   centerTitle: true,
                 ),
-                bottomNavigationBar: BottomNavigationBar(
-                  onTap: (value) {
-                    selectedIndex = value;
-                    setState(() {});
-                  },
-                  backgroundColor: AppTheme.mainColor,
-                  currentIndex: selectedIndex,
-                  selectedItemColor: AppTheme.selectedItem,
-                  unselectedItemColor: AppTheme.unselectedItem,
-                  items: [
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.local_offer_rounded), label: 'Offers'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.note_rounded), label: 'Notes'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.video_collection), label: 'Videos'),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.shop), label: 'Buy Now')
-                  ],
+                bottomNavigationBar: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [AppTheme.orangeColor, AppTheme.blueColor],
+                      begin: Alignment.topLeft,
+                      end: Alignment.topRight,
+                      stops: [0.0, 0.8],
+                      tileMode: TileMode.clamp,
+                    ),
+                  ),
+                  child: BottomNavigationBar(
+                    onTap: (value) {
+                      selectedIndex = value;
+                      setState(() {});
+                    },
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    currentIndex: selectedIndex,
+                    selectedItemColor: AppTheme.selectedItem,
+                    unselectedItemColor: AppTheme.unselectedItem,
+                    items: const [
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.local_offer_rounded),
+                          label: 'Offers'),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.note_rounded), label: 'Notes'),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.video_collection), label: 'Videos'),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.shop), label: 'Buy Now')
+                    ],
+                  ),
                 ),
                 drawer: Drawer(
                   child: HomeDrawer(

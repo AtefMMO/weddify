@@ -14,82 +14,85 @@ class MerchantContainer extends StatelessWidget {
       required this.categoryImage});
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, CategoryScreen.routeName,
-            arguments: category);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          child: Stack(children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                categoryImage!,
-                width: double.infinity,
-                height: 160, // Set the desired height here
-                fit: BoxFit.cover, // Adjust the fit to cover the entire space
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: AppTheme.lightGrey,),
+        child: InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, CategoryScreen.routeName,
+                arguments: category);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  categoryImage!,
+                  width: double.infinity,
+                  height: 130, // Set the desired height here
+                  fit: BoxFit.cover, // Adjust the fit to cover the entire space
+                ),
               ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  children: [
-                    Text(
-                      categoryTranslate ?? 'Category Name',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: 'RTL-MochaYemen-Sugar',
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 4
-                          ..color = Colors.black,
-                      ),
-                    ),
-                    Text(
-                      categoryTranslate ?? 'Category Name',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: 'RTL-MochaYemen-Sugar',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-               Stack(
-                  children: [
-                    Text(
-                      category ?? 'Category Name',
-                      style: TextStyle(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
+                    children: [
+                      Text(
+                        categoryTranslate ?? 'Category Name',
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           fontFamily: 'RTL-MochaYemen-Sugar',
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 4
-                          ..color = Colors.black,),
-                    ),Text(
-                      category ?? 'Category Name',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: 'RTL-MochaYemen-Sugar',
-                       ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ]),
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 4
+                            ..color = Colors.black,
+                        ),
+                      ),
+                      Text(
+                        categoryTranslate ?? 'Category Name',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontFamily: 'RTL-MochaYemen-Sugar',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                 Stack(
+                    children: [
+                      Text(
+                        category ?? 'Category Name',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontFamily: 'RTL-MochaYemen-Sugar',
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 4
+                            ..color = Colors.black,),
+                      ),Text(
+                        category ?? 'Category Name',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontFamily: 'RTL-MochaYemen-Sugar',
+                         ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ]),
+          ),
         ),
       ),
     );

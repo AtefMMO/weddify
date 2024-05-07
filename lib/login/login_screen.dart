@@ -98,7 +98,7 @@ class LogInScreen extends StatelessWidget {
                                   );
                                 }
                               },
-                              child: Image.asset('assets/images/signIn.png')),
+                              child: Image.asset('assets/images/Sign_in_button.png')),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20),
@@ -111,7 +111,7 @@ class LogInScreen extends StatelessWidget {
                                 InkWell(
                                   child: const Text(
                                     ' here',
-                                    style: TextStyle(color: Colors.lightBlue),
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                   onTap: () {
                                     Navigator.pushNamed(context, SignUpScreen.routeName);

@@ -24,7 +24,13 @@ final  String facebookUrl='https://www.facebook.com/people/Weddify/6155699410147
             Container(
               height: MediaQuery.of(context).size.height * 0.225,
               width: double.infinity,
-              color: AppTheme.mainColor,
+              decoration: BoxDecoration(gradient:LinearGradient(
+                colors: [AppTheme.orangeColor, AppTheme.blueColor],
+                begin: Alignment.topLeft,
+                end: Alignment.topRight,
+                stops: [0.0, 0.8],
+                tileMode: TileMode.clamp,
+              ), ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 70),
                 child: Text(
