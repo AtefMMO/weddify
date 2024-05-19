@@ -15,7 +15,14 @@ class CategoryScreen extends StatelessWidget {
       create: (context) => MarketCubit(),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppTheme.mainColor,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: <Color>[AppTheme.orangeColor, AppTheme.blueColor])),
+          )
+        ,
           title: Text(category ?? 'category',style: const TextStyle(fontFamily: 'RTL-MochaYemen-Sugar'),),
           centerTitle: true,
         ),
@@ -36,7 +43,7 @@ class CategoryScreen extends StatelessWidget {
                             crossAxisCount: 2,
                             crossAxisSpacing: 8.0,
                             mainAxisSpacing: 8.0,
-                            childAspectRatio: 0.75,
+                            childAspectRatio: 0.7,
                           ),
                           itemCount: state.items.length,
                           itemBuilder: (context, index) {

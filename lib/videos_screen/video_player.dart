@@ -47,7 +47,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       appBar: _isFullScreen
           ? null
           : AppBar(
-              backgroundColor: AppTheme.mainColor,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: <Color>[
+                    AppTheme.orangeColor,
+                    AppTheme.blueColor
+                  ])),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
               title: Text(widget.video!.title!),
               centerTitle: true,
               leading: InkWell(

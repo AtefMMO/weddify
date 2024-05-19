@@ -13,7 +13,18 @@ class MyProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppTheme.mainColor,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: <Color>[
+                    AppTheme.orangeColor,
+                    AppTheme.blueColor
+                  ])),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: Text('Weddify'),
         centerTitle: true,
       ),
@@ -208,7 +219,7 @@ class MyProfileScreen extends StatelessWidget {
                               style: TextStyle(color: Colors.white),
                             ),
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: AppTheme.mainColor),
+                                backgroundColor: AppTheme.orangeColor),
                           )),
                     ],
                   ),

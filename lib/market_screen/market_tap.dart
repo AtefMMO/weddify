@@ -31,7 +31,7 @@ class _MarketState extends State<Market> {
     'Furniture',
     'Home Furnishings',
     'Wedding halls',
-    'Limousine companies',
+    'Limousine\ncompanies',
     'Kitchens',
     'Electrical Tools',
     'Healthy Equipment',
@@ -84,6 +84,7 @@ class _MarketState extends State<Market> {
                   },
                 ),
               ),
+              SizedBox(height: 10,),
               query.isEmpty
                   ? Expanded(
                       child: ListView.builder(
@@ -121,7 +122,7 @@ class _MarketState extends State<Market> {
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 8.0,
                                         mainAxisSpacing: 8.0,
-                                        childAspectRatio: 0.75,
+                                        childAspectRatio: 0.7,
                                       ),
                                       itemBuilder: (context, index) {
                                         return ItemUserView(
