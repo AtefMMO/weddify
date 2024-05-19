@@ -29,7 +29,7 @@ class ItemDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(color: AppTheme.lightGrey,
+              Container(color: AppTheme.lightGrey,height: MediaQuery.of(context).size.height*.5,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ClipRRect(
@@ -37,8 +37,8 @@ class ItemDetailsScreen extends StatelessWidget {
                     child: Image.network(
                       item!.imageUrl!,
                       width: double.infinity,
-                      height: 300, // Set the desired height here
-                      fit: BoxFit.cover, // Adjust the fit to cover the entire space
+                      height:double.infinity,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),

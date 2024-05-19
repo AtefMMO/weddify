@@ -31,7 +31,7 @@ class _MarketState extends State<Market> {
     'Furniture',
     'Home Furnishings',
     'Wedding halls',
-    'Limousine companies',
+    'Limousine\ncompanies',
     'Kitchens',
     'Electrical Tools',
     'Healthy Equipment',
