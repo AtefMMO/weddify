@@ -7,7 +7,6 @@ import '../models/item_model.dart';
 class ItemUserView extends StatelessWidget {
   late ItemData item;
   ItemUserView({required this.item});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +38,7 @@ class ItemUserView extends StatelessWidget {
                   )),
             ),
           ),
-          Text('title: ${item.title}'),
+          Text('title: ${item.title}',overflow: TextOverflow.ellipsis,),
           Text('price: ${item.price}'),
           Text('sold by: ${item.seller}'),
         ],
